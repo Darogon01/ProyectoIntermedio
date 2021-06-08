@@ -4,7 +4,12 @@ let apiKey = process.env.API_KEY
 
 const routes = {
     home: (req, res) => {
-        res.status(200).render('home')
+        let url = { url: req.url }
+        res.status(200).render('home', url)
+    },
+    signup: (req, res) => {
+        let url = { url: req.url }
+        res.status(200).render('signup', url)
     },
     film: async(req, res) => {
         let title = req.params.title
