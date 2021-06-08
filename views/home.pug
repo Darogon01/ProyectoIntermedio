@@ -1,3 +1,23 @@
 include ./header
 
 h1 Home
+
+    head
+        title Login Form
+    body
+        div 
+            img(src="https://dbdzm869oupei.cloudfront.net/img/sticker/preview/1818.png", alt="Aquí va la imagen de entrada")
+
+        form(action = "/login" method = "POST")
+            label(for = "email") Email:
+            input(type = "email", id ="email")
+            br
+            label(for = "password") Contraseña:
+            input(type = "password", class = "password")
+            br
+            button(type="submit") Login 
+
+        div 
+            button(type="submit") Google 
+            button(type="submit") Facebook 
+            button(type="submit") Sign Up 
