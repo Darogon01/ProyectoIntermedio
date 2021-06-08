@@ -1,3 +1,27 @@
+
 include ./header
 
-h1 Signup
+main
+    div 
+        img(src='', alt='Aqui irá una imagen')
+
+    form(action='/signup', method='POST') 
+        label(for='email')
+        br
+        input#email(type='email', name='email', placeholder='Email')
+        label(for='password')
+        br
+        input#password(type='password', name='password',
+        placeholder='Password')
+        br
+        button(type="submit") signup
+    p or 
+        br
+    div
+        button(type="submit") sign up Facebook
+        br
+        button(type="submit") sign up Google
+
+
+
+
