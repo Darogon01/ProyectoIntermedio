@@ -58,3 +58,26 @@ header {
     justify-content: space-evenly;
     width: 45vw;
 }
+
+/* ------------------- ESTILOS FILM  ------------------- */
+
+.searchTitleMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+
+}
+.favorite{
+    width: 10vw;
+    margin-top: auto;
+
+}
+.poster{
+    width: 30vw;
+    height: fit-content;
+    border-radius: 5px;
+}

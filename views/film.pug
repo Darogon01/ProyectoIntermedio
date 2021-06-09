@@ -1,0 +1,18 @@
+include ./header
+main.searchTitleMain
+    div
+        div 
+            img.poster(src=Poster, alt="Imagen pelicula")
+        div
+            h2 #{Title}
+            p #{Director}
+            p #{Genere}
+            p #{Runtime}
+            p #{Year}
+            img.fovorite(src="../static/img/favorite.svg", alt="corazon")
+    div
+        h2 Sipnopsis
+            p #{Plot}
+
+script(src='../static/js/searchTitle.js')       
+    
