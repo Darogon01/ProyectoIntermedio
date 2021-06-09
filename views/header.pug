@@ -8,6 +8,12 @@ html(lang="en")
         link(rel="stylesheet", href="../static/css/reset.css")
         link(rel="stylesheet", href="../static/css/style.css")
     body 
+
         if url != "/" && url != "/signup"
             header
+            ul 
+                li Panel de Control a(href="dirección panel de control")  
+                li Buscador de películas a(href="dirección buscador de pelicula") 
+                li Mis películas a(href="dirección mis películas") 
+                li Salir a(logout)
                 button#menu Menú
