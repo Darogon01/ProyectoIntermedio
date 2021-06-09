@@ -33,27 +33,51 @@ const routes = {
         let data = await getFilms()
         res.status(200).render('movies', { data })
     },
-    createMovie: async(req, res) => {
-        let id = req.query.id
-        if (id) {
-            try {
-                //BUSCAR EN BBDD LA PELÍCULA 
-                // const data = await Film.find({ "id": id })
-                res.status(200).render('createmovie', data)
-            } catch (err) {
-                res.status(500).json({ message: err.message });
-            }
-        } else {
-            res.status(200).render('createmovie')
-        }
+    createMovie: (req, res) => {
+        res.status(200).render('createmovie')
     },
     createMoviePost: async(req, res) => {
         let film = req.body
         console.log(film)
         try {
             //GUARDAR EN BBDD LA PELÍCULA
-            // const newProduct = await product.save();
+            // const newProduct = await Film.save()
             // res.status(200).redirect(`/movies`)
+            res.status(200).send(`Pelicula creada`) // BORRAR ESTA LINEA
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    },
+    editMovie: async(req, res) => {
+        let id = req.params.id
+        try {
+            //BUSCAR EN BBDD LA PELÍCULA
+            // const data = await Film.find({ "id": id })
+            // DATA DE EJEMPLO
+            let data = {
+                'id': id,
+                'title': 'titulo',
+                'urlImage': 'url imagen',
+                'year': 1234,
+                'runtime': 4321,
+                'genre': 'genero',
+                'director': 'director',
+                'actors': 'actores',
+                'plot': 'sinopsis'
+            }
+            res.status(200).render('editmovie', data)
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    },
+    editMoviePut: async(req, res) => {
+        let film = req.body
+        console.log(film)
+        try {
+            //MODIFICAR EN BBDD LA PELÍCULA
+            // const newProduct = await Film.set(req.body);
+            // res.status(200).redirect(`/movies`)
+            res.status(200).send(`Pelicula modificada`) // BORRAR ESTA LINEA
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
