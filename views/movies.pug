@@ -1,0 +1,23 @@
+include ./header
+
+ul#usrMovies
+  each film in data
+    li(id=film.imdbID)
+        img.poster(src=film.Poster, alt="Poster #{film.Title}")
+        div.info
+            h2 #{film.Title}
+            p 
+                strong Año:
+                |  #{film.Year}
+            p 
+                strong Director: 
+                | #{film.Director}
+            p 
+                strong Género: 
+                | #{film.Genre}
+            p 
+                strong Duración: 
+                | #{film.Runtime}
+        img.favorite(src="../static/img/favorite.svg", alt="favorite icon")
+            
+script(src='../static/js/usrMovies.js')
