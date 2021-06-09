@@ -1,6 +1,4 @@
-h1 {
-    color: blue;
-}
+/* ------------------- ESTILOS GENERALES ------------------- */
 
 header {
     height: 8vh;
@@ -8,4 +6,55 @@ header {
     justify-content: flex-end;
     border-bottom: 1px solid black;
     padding: 10px;
+}
+
+
+/* ------------------- ESTILOS DASHBOARD ------------------- */
+
+#dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 75px);
+    justify-content: space-evenly;
+}
+
+#dashboard button {
+    width: fit-content;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+#dashboard img {
+    width: 50vw;
+}
+
+
+/* ------------------- ESTILOS USRMOVIES ------------------- */
+
+#usrMovies li {
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+#usrMovies img.poster {
+    width: 30vw;
+    height: fit-content;
+    border-radius: 5px;
+}
+
+#usrMovies img.favorite {
+    width: 15vw;
+    margin-top: auto;
+}
+
+#usrMovies .info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 45vw;
 }
