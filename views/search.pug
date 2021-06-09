@@ -1,0 +1,32 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Films
+        link(rel="stylesheet", href="../static/css/reset.css")
+        link(rel="stylesheet", href="../static/css/style.css")
+    body 
+   
+    form#formulario(action="/film" method="post" )
+        input(name="title" type="text")
+        button(type="submit") Buscar pelicula
+        if Response == "True"
+            h1 #{Title} 
+            div.content
+            img(src=Poster, alt="portada")
+            div.description
+                p 
+                    strong Título: 
+                p #{film.Title}
+                p 
+                    strong Director: 
+                p #{film.director}
+                p 
+                    strong Género: 
+                p #{film.genre}
+                p 
+                    strong Duración: 
+                p #{film.Runtime}
+        else
+            p El título introducido no existe
