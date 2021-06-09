@@ -20,7 +20,7 @@ const routes = {
         res.status(200).render('film', data)
     },
     movies: async(req, res) => {
-        // SUSTITUIR POR LA RESPUESTA DE LA BBDD
+        // SUSTITUIR POR LA RESPUESTA DE LA BBDD DE FAVORITOS
         let arrFavoritas = ["tt1216475", "tt4029846", "tt10222892", "tt0401383"]
 
         let getFilms = async() => {
@@ -32,6 +32,31 @@ const routes = {
         }
         let data = await getFilms()
         res.status(200).render('movies', { data })
+    },
+    createMovie: async(req, res) => {
+        let id = req.query.id
+        if (id) {
+            try {
+                //BUSCAR EN BBDD LA PELÍCULA 
+                // const data = await Film.find({ "id": id })
+                res.status(200).render('createmovie', data)
+            } catch (err) {
+                res.status(500).json({ message: err.message });
+            }
+        } else {
+            res.status(200).render('createmovie')
+        }
+    },
+    createMoviePost: async(req, res) => {
+        let film = req.body
+        console.log(film)
+        try {
+            //GUARDAR EN BBDD LA PELÍCULA
+            // const newProduct = await product.save();
+            // res.status(200).redirect(`/movies`)
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
     }
 }
 
