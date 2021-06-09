@@ -48,7 +48,7 @@ const routes = {
             res.status(400).json({ message: err.message });
         }
     },
-    editMovie: (req, res) => {
+    editMovie: async(req, res) => {
         let id = req.params.id
         try {
             //BUSCAR EN BBDD LA PELÍCULA
