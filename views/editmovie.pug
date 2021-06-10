@@ -3,7 +3,7 @@ include ./header
 main#adminCreate 
     form(action="/editMovie", method="post")
         input(type='hidden' name='_method' value='put')
-        input(type='hidden' name='id' value=id)
+        input(type='hidden' name='filmId' value=filmId)
         input#title(type="text", name="title", value=title)
         input#urlImage(type="text", name="urlImage", value=urlImage)
         input#year(type="number", name="year", value=year)

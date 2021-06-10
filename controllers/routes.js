@@ -49,33 +49,21 @@ const routes = {
     editMovie: async(req, res) => {
         let id = req.params.id
         try {
-            //BUSCAR EN BBDD LA PELÍCULA
-            // const data = await Film.find({ "id": id })
-            // DATA DE EJEMPLO
-            let data = {
-                'id': id,
-                'title': 'titulo',
-                'urlImage': 'url imagen',
-                'year': 1234,
-                'runtime': 4321,
-                'genre': 'genero',
-                'director': 'director',
-                'actors': 'actores',
-                'plot': 'sinopsis'
-            }
-            res.status(200).render('editmovie', data)
+            const data = await Film.find({ "filmId": id })
+            res.status(200).render('editmovie', data[0])
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     },
     editMoviePut: async(req, res) => {
+        let id = req.body.filmId
         let film = req.body
-        console.log(film)
         try {
-            //MODIFICAR EN BBDD LA PELÍCULA
-            // const newProduct = await Film.set(req.body);
-            // res.status(200).redirect(`/movies`)
-            res.status(200).send(`Pelicula modificada`) // BORRAR ESTA LINEA
+            await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
+                (err, data) => {
+                    if (err) return res.status(500).send(err.errors.urlImage.message);
+                    return res.status(201).json({ data, status: "Pelicula creada" }) //.redirect(`/movies`) //quitar el .json({...})
+                });
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
