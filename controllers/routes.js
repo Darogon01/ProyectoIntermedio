@@ -1,5 +1,6 @@
 const films = require('../utils/films');
-require('dotenv').config();
+const Film = require('../models/Films')
+
 let apiKey = process.env.API_KEY
 
 const routes = {
@@ -37,13 +38,10 @@ const routes = {
         res.status(200).render('createmovie')
     },
     createMoviePost: async(req, res) => {
-        let film = req.body
-        console.log(film)
+        const film = new Film(req.body)
         try {
-            //GUARDAR EN BBDD LA PELÍCULA
-            // const newProduct = await Film.save()
-            // res.status(200).redirect(`/movies`)
-            res.status(200).send(`Pelicula creada`) // BORRAR ESTA LINEA
+            const newFilm = await film.save()
+            res.status(201).json({ newFilm, status: "Pelicula creada" }) //.redirect(`/movies`) //quitar el .json({...})
         } catch (err) {
             res.status(400).json({ message: err.message });
         }

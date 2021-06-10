@@ -17,7 +17,7 @@ header {
 
 /* ------------------- ESTILOS DASHBOARD ------------------- */
 
-#dashboard div {
+#dashboard {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,7 +80,6 @@ header {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 75px);
-    justify-content: space-evenly;
 }
 
 #adminCreate input {
