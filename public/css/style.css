@@ -14,6 +14,38 @@ header {
     padding: 10px;
 }
 
+/* ------------------- ESTILOS SIGNUP ------------------- */
+main.containersignupmain{
+    display: flex ;
+    flex-flow: column-reverse;
+    justify-content: center;
+    align-items: center;
+    padding-top: 25vh;
+}
+
+.containersignupmain > section > form > div{
+    display:flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.containersignupmain > section > form > div > *{
+    margin-bottom: 6px;
+}
+.containersignupsection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+.containersignupsection input label{
+    display: inline-block;
+    
+}
+
+#logo img{
+    width: 40vw;
+
+}
 
 /* ------------------- ESTILOS DASHBOARD ------------------- */
 
