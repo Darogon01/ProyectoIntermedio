@@ -46,6 +46,10 @@ header {
     border-radius: 5px;
 }
 
+#usrMovies div.card {
+    display: flex;
+}
+
 #usrMovies img.poster {
     width: 30vw;
     height: fit-content;
@@ -55,10 +59,11 @@ header {
 #usrMovies button.favorite {
     border: none;
     background: none;
-    padding: unset;
+    margin-top: auto;
+    /* padding: unset;
     position: absolute;
     right: 15px;
-    margin-top: -50px;
+    margin-top: -50px; */
 }
 
 #usrMovies button.favorite img {
@@ -74,7 +79,61 @@ header {
 }
 
 
-/* ------------------- ESTILOS USRMOVIES ------------------- */
+/* ------------------- ESTILOS ADMINMOVIES ------------------- */
+
+#adminMovies {
+    display: flex;
+    flex-direction: column;
+}
+
+#adminMovies button#createFilm {
+    padding: 15px;
+    margin: 15px 10px 10px;
+}
+
+#adminMovies li {
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+#adminMovies div.card {
+    display: flex;
+}
+
+#adminMovies img.poster {
+    width: 30vw;
+    border-radius: 5px;
+}
+
+#adminMovies .info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 45vw;
+}
+
+div#buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#adminMovies button.button {
+    border: none;
+    background: none;
+}
+
+#adminMovies button.button img {
+    width: 10vw;
+}
+
+
+/* ------------------- ESTILOS CREATE & EDIT MOVIES ------------------- */
 
 #adminCreate form {
     display: flex;

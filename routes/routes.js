@@ -5,9 +5,11 @@ router.get('/', pages.home)
 router.get('/signup', pages.signup)
 router.get('/dashboard', pages.dashboard)
 router.get('/movies', pages.movies)
-router.get('/createMovie', pages.createMovie)
+router.get('/adminMovies', pages.adminMovies) //CAMBIAR ENDPOINT CUANDO TENGAMOS ROLES DE USER Y ADMIN /movies
+router.get('/createMovie', pages.createMovieGet)
 router.post('/createMovie', pages.createMoviePost)
-router.get('/editMovie/:id', pages.editMovie)
+router.get('/editMovie/:id', pages.editMovieGet)
 router.post('/editMovie', pages.editMoviePut) //CONSULTAR POR QUE NO FUNCIONA CON PUT
+router.get('/removeMovie', pages.deleteMovie)
 
 module.exports = router
