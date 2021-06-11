@@ -8,4 +8,20 @@ html(lang="en")
         link(rel="stylesheet", href="../static/css/reset.css")
         link(rel="stylesheet", href="../static/css/style.css")
     body 
-        if url != "/" && url != "/signup"
+    if url != "/" && url != "/signup"
+        header
+            nav(id='contenedor')
+                input#menu(type='checkbox')
+                label(for='menu')  ☰
+                ul(class='drop')
+                    li
+                        a(href='dashboard.pug') Panel de control
+                    li
+                        a(href='search.pug') Buscador de películas
+                    li
+                        a(href='film.pug') Mis películas
+                    li
+                        a(href='#') Salir
+                            
+            
+        
