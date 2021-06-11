@@ -1,0 +1,13 @@
+include ./header
+
+main#adminCreate 
+    form(action="/editMovie", method="post")
+        input(type='hidden' name='_method' value='put')
+        input(type='hidden' name='filmId' value=filmId)
+        input#title(type="text", name="title", value=title)
+        input#urlImage(type="text", name="urlImage", value=urlImage)
+        input#year(type="number", name="year", value=year)
+        input#director(type="text", name="director", value=director)
+        input#genre(type="text", name="genre", value=genre)
+        input#runtime(type="number", name="runtime", value=runtime)
+        input(type="submit", value="Editar Pelicula")
