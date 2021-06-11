@@ -49,25 +49,28 @@ const routes = {
         }
         let data = await getFilms()
         res.status(200).render('search', { data })
-
-        
-
-
-
     },
-    createMovie: (req, res) => {
+    adminMovies: async(req, res) => {
+        try {
+            const data = await Film.find()
+            res.status(200).render('movies-admin', { data })
+        } catch (err) {
+            res.status(400).json({ message: err.message });
+        }
+    },
+    createMovieGet: (req, res) => {
         res.status(200).render('createmovie')
     },
     createMoviePost: async(req, res) => {
         const film = new Film(req.body)
         try {
             const newFilm = await film.save()
-            res.status(201).json({ newFilm, status: "Pelicula creada" }) //.redirect(`/movies`) //quitar el .json({...})
+            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     },
-    editMovie: async(req, res) => {
+    editMovieGet: async(req, res) => {
         let id = req.params.id
         try {
             const data = await Film.find({ "filmId": id })
@@ -83,12 +86,20 @@ const routes = {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
                     if (err) return res.status(500).send(err.errors.urlImage.message);
-                    return res.status(201).json({ data, status: "Pelicula creada" }) //.redirect(`/movies`) //quitar el .json({...})
+                    return res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
                 });
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
-
+    },
+    deleteMovie: async(req, res) => {
+        let id = req.query.id
+        try {
+            await Film.deleteOne({ "filmId": id });
+            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+        } catch (err) {
+            res.status(500).json({ message: err.message });
+        }
     }
 }
 
