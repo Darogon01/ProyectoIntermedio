@@ -1,5 +1,11 @@
 /* ------------------- ESTILOS GENERALES ------------------- */
 
+h2 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 header {
     height: 8vh;
     display: flex;
@@ -92,9 +98,17 @@ input:checked ~ label {
     border-radius: 5px;
 }
 
-#usrMovies img.favorite {
-    width: 15vw;
-    margin-top: auto;
+#usrMovies button.favorite {
+    border: none;
+    background: none;
+    padding: unset;
+    position: absolute;
+    right: 15px;
+    margin-top: -50px;
+}
+
+#usrMovies button.favorite img {
+    width: 10vw;
 }
 
 #usrMovies .info {
@@ -103,4 +117,19 @@ input:checked ~ label {
     flex-direction: column;
     justify-content: space-evenly;
     width: 45vw;
+}
+
+
+/* ------------------- ESTILOS USRMOVIES ------------------- */
+
+#adminCreate form {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 75px);
+}
+
+#adminCreate input {
+    height: 5vh;
+    margin: 10px;
+    text-align: center;
 }
