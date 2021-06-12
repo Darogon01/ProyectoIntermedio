@@ -1,4 +1,4 @@
-const films = require('../utils/films');
+const films = require('../utils/film');
 require('dotenv').config();
 let apiKey = process.env.API_KEY
 
@@ -21,10 +21,12 @@ const routes = {
     },
     search: async(req, res) => {
         let title = req.params.title
-        console.log(title)
+        
         let data = await films.getPelicula(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`)
         res.status(200).render('search', data)
-        
+
+        /* Aqui irán las promesas y metodos del scraping para la pagina film */
+        /* res.status(200).render('film', Datos Scrapping) */ //datos Scrapping?
     },
     movies: async(req, res) => {
         // SUSTITUIR POR LA RESPUESTA DE LA BBDD

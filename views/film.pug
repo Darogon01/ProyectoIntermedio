@@ -1,15 +1,15 @@
 include ./header
 main.searchTitleMain
-    div.cajasup
+    div.wraperserchtitle
         div 
-            img.poster(src=Poster, alt="Imagen pelicula")
-        div.containerfilm
-            h2 #{Title}
-            p #{Director}
-            p #{Genre}
-            p #{Runtime}
-            p #{Year}
-            img.favorite(src="../static/img/favorite.svg", alt="corazon")
+            img.postersearchtitle(src=Poster, alt="Imagen pelicula")
+        div.containersearchfilm
+            h2 Titulo: #{Title}
+            p Director: #{Director}
+            p Genero: #{Genre}
+            p Duración: #{Runtime}
+            p Año: #{Year}
+            img.favoritesearchtitle(src="../static/img/favorite.svg", alt="favorite icon")
     div
         h2 Sipnopsis
             p #{Plot}
