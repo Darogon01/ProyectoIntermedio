@@ -1,4 +1,4 @@
-const films = require('../utils/films');
+const films = require('../utils/films')
 const Film = require('../models/Films')
 
 let apiKey = process.env.API_KEY
@@ -55,7 +55,7 @@ const routes = {
             const data = await Film.find()
             res.status(200).render('movies-admin', { data })
         } catch (err) {
-            res.status(400).json({ message: err.message });
+            res.status(400).json({ message: err.message })
         }
     },
     createMovieGet: (req, res) => {
@@ -67,7 +67,10 @@ const routes = {
             const newFilm = await film.save()
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
         } catch (err) {
-            res.status(400).json({ message: err.message });
+            // res.status(400).json({ message: err, data: film })
+            // console.log(err)
+
+            res.status(400).render('createmovie', { message: err, data: film })
         }
     },
     editMovieGet: async(req, res) => {
@@ -76,7 +79,7 @@ const routes = {
             const data = await Film.find({ "filmId": id })
             res.status(200).render('editmovie', data[0])
         } catch (err) {
-            res.status(400).json({ message: err.message });
+            res.status(400).json({ message: err.message })
         }
     },
     editMoviePut: async(req, res) => {
@@ -85,20 +88,20 @@ const routes = {
         try {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
-                    if (err) return res.status(500).send(err.errors.urlImage.message);
+                    if (err) return res.status(500).send(err.errors.urlImage.message)
                     return res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
-                });
+                })
         } catch (err) {
-            res.status(400).json({ message: err.message });
+            res.status(400).json({ message: err.message })
         }
     },
     deleteMovie: async(req, res) => {
         let id = req.query.id
         try {
-            await Film.deleteOne({ "filmId": id });
+            await Film.deleteOne({ "filmId": id })
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
         } catch (err) {
-            res.status(500).json({ message: err.message });
+            res.status(500).json({ message: err.message })
         }
     }
 }
