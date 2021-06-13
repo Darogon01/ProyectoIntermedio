@@ -14,16 +14,15 @@ header {
     padding: 10px;
 }
 
-.drop{
+.drop {
     display: none;
 }
 
-
-input:checked  ~ ul{
-    display:block;
+input:checked~ul {
+    display: block;
 }
 
-input {
+input#menu {
     display: none;
 }
 
@@ -40,25 +39,48 @@ label {
     user-select: none;
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
 
-label:hover{
+label:hover {
     background: grey;
 }
 
-input:checked ~ label {
-    background: lightgrey; 
+input:checked~label {
+    background: lightgrey;
 }
-  
 
 
+/* ------------------- ESTILOS ERRORES VALIDACIÓN ------------------- */
 
+.err, .err::placeholder {
+    color: red;
+}
 
+.popuptext {
+    width: 90%;
+    background-color: rgb(255, 67, 67);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: relative;
+    z-index: 1;
+    left: 50%;
+    margin-left: -45%;
+}
 
-
-
+.popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(255, 67, 67) transparent transparent transparent;
+}
 
 
 /* ------------------- ESTILOS DASHBOARD ------------------- */
