@@ -1,8 +1,0 @@
-[
-  {
-    "name": "Sensacine",
-    "url": "https://www.sensacine.com/",
-    "scriptName": "youtube",
-    "selectors": "div.content-txt.review-card-content"
-  }
-]
