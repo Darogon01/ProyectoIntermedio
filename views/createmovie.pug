@@ -3,9 +3,9 @@ include ./header
 main#adminCreate 
     form(action="/createMovie", method="post")
         if message
-            - let placeholderT = message.errors.title ? message.errors.title.message : ""
+            - let placeholderT = message.errors.title ? "El título es un campo requerido" : ""
             - let valueT = data.title != '' ? data.title : ''
-            - let warningT = placeholder != "" ? "err" : ""
+            - let warningT = placeholderT != "" ? "err" : ""
             input#title(type="text", name="title", placeholder=placeholderT, value=valueT, class=warningT)
             if message.errors.urlImage
                 span.popuptext #{message.errors.urlImage.message}
@@ -13,7 +13,7 @@ main#adminCreate
             else 
                 input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=data.urlImage)
             if message.errors.year
-                span.popuptext #{message.errors.year.message}
+                span.popuptext El año no puede ser menor a 1888
                 input#year(type="number", name="year", placeholder="Año err", value=message.errors.year.value, class="err")
             else 
                 input#year(type="number", name="year", placeholder="Año err", value=data.year)

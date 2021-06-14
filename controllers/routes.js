@@ -67,9 +67,6 @@ const routes = {
             const newFilm = await film.save()
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
         } catch (err) {
-            // res.status(400).json({ message: err, data: film })
-            // console.log(err)
-
             res.status(400).render('createmovie', { message: err, data: film })
         }
     },
@@ -79,7 +76,7 @@ const routes = {
             const data = await Film.find({ "filmId": id })
             res.status(200).render('editmovie', data[0])
         } catch (err) {
-            res.status(400).json({ message: err.message })
+            res.status(500).json({ message: err.message })
         }
     },
     editMoviePut: async(req, res) => {
@@ -88,11 +85,11 @@ const routes = {
         try {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
-                    if (err) return res.status(500).send(err.errors.urlImage.message)
+                    if (err) return res.status(400).render('editmovie', { message: err, data: film })
                     return res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
                 })
         } catch (err) {
-            res.status(400).json({ message: err.message })
+            res.status(500).json({ message: err.message })
         }
     },
     deleteMovie: async(req, res) => {
