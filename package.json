@@ -19,6 +19,7 @@
     "homepage": "https://github.com/Darogon01/ProyectoIntermedio#readme",
     "dependencies": {
         "express": "^4.17.1",
+        "mariadb": "^2.5.3",
         "mongodb": "^3.6.9",
         "mongoose": "^5.12.13",
         "mongoose-auto-increment": "^5.0.1",
