@@ -46,16 +46,16 @@ const routes = {
             ".content-txt.review-card-content"); */
         await page.evaluate(()=>{
             console.log('estamos dentro')
-            const data = [];
+            const datacoment = [];
             const opinions = document.querySelectorAll(
             ".content-txt.review-card-content"); 
           
           opinions.forEach((cometarios) => {
-            data.push(cometarios);
+            datacoment.push(cometarios);
 
         });
         console.log(data)
-        return data;
+        return datacoment;
 
         })
 
