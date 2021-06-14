@@ -2,18 +2,21 @@ include ./header
 main.searchTitleMain
     div.wraperserchtitle
         div 
-            img.postersearchtitle(src=Poster, alt="Imagen pelicula")
+            img.postersearchtitle(src=data.Poster, alt="Imagen pelicula")
         div.containersearchfilm
-            h2 Titulo: #{Title}
-            p Director: #{Director}
-            p Genero: #{Genre}
-            p Duración: #{Runtime}
-            p Año: #{Year}
+            h2 Titulo: #{data.Title}
+            p Director: #{data.Director}
+            p Genero: #{data.Genre}
+            p Duración: #{data.Runtime}
+            p Año: #{data.Year}
             img.favoritesearchtitle(src="../static/img/favorite.svg", alt="favorite icon")
     div
         h2 Sipnopsis
             p #{Plot}
         h2 Opiniones
+          each val in comentarios 
+            p #{val}
+
             
 
 script(src='../static/js/searchTitle.js')       

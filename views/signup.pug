@@ -1,29 +1,4 @@
 
-include ./header
-
-main.containersignupmain
-    section.containersignupsection 
-        div#logo 
-            img(src='../static/img/obturador.svg', alt='Aqui irá una imagen')
-
-        form(action='/signup', method='POST') 
-            
-            div 
-                label(for='email') Email   
-                input#email(type='email', name='email', placeholder='Email')
-                
-            div  
-                label(for='password') Contraseña 
-                input#password(type='password', name='password',
-                placeholder='Password')
-            div    
-                button(type="submit") signup
-                p or 
-                
-            div
-                button(type="submit") sign up Facebook
-                br
-                button(type="submit") sign up Google
 
 script(src='../static/js/signUp.js')
 

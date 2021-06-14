@@ -18,11 +18,11 @@ const routes = {
   },
   film: async (req, res) => {
     let title = req.params.title;
-    let titleMayus = capitalizarPrimeraLetra(title)
+    let titleMayus = capitalizarPrimeraLetra(title);
     function capitalizarPrimeraLetra(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-      }
-       
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     let data = await films.getPelicula(
       `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
     );
@@ -32,57 +32,44 @@ const routes = {
       const browser = await puppeteer.launch({ headless: false });
       const page = await browser.newPage();
       await page.goto(`https://www.sensacine.com`);
-      await page.waitForSelector('#didomi-notice-agree-button')
-      await page.click('#didomi-notice-agree-button');
-        await page.waitForSelector('#header-main-mobile-btn-search')
-        await page.click('#header-main-mobile-btn-search');
-        await page.waitForSelector('#header-search-input')
-        
-        await page.type('#header-search-input', titleMayus);
-        await page.waitForSelector(`#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`)
-        await page.click(`#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`);
-        await page.waitForSelector(".content-txt.review-card-content");
-        /* const opinions = document.querySelectorAll(
+      await page.waitForSelector("#didomi-notice-agree-button");
+      await page.click("#didomi-notice-agree-button");
+      await page.waitForSelector("#header-main-mobile-btn-search");
+      await page.click("#header-main-mobile-btn-search");
+      await page.waitForSelector("#header-search-input");
+
+      await page.type("#header-search-input", titleMayus);
+      await page.waitForSelector(
+        `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+      );
+      await page.click(
+        `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+      );
+      await page.waitForSelector(".content-txt.review-card-content");
+      /* const opinions = document.querySelectorAll(
             ".content-txt.review-card-content"); */
-        await page.evaluate(()=>{
-            console.log('estamos dentro')
-            const datacoment = [];
-            const opinions = document.querySelectorAll(
-            ".content-txt.review-card-content"); 
-          
-          opinions.forEach((cometarios) => {
-            datacoment.push(cometarios);
+      const coments = await page.evaluate(() => {
+        console.log("estamos dentro");
+        const opinions = document.querySelectorAll(
+          ".content-txt.review-card-content"
+        );
+        console.log(opinions);
+        const dataComent = [];
 
+        opinions.forEach((cometarios) => {
+          console.log(cometarios);
+          dataComent.push(cometarios.innerText);
         });
-        console.log(data)
-        return datacoment;
 
-        })
-
-        
-        
-      //async function getPageData() {
-        
-          /* const data = await page.evaluate(() => {
-            const opinions = document.querySelectorAll(
-              ".content-txt.review-card-content"
-
-          );
-          const data = [];
-          console.log(data)
-          opinions.forEach(() => {
-            data.push();
-            return data;
-          }); */
-          
-          
-        /* }); */
-
-        /* await browser.close(); */
-      //}
+        return dataComent;
+      });
+console.log(coments)
+return coments
+      
     }
-    opinions();
-    res.status(200).render("film", data);
+    let reviews = await opinions();
+    res.status(200).render("film", { data, comentarios: reviews });
+    
   },
   search: async (req, res) => {
     let title = req.params.title;
