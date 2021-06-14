@@ -1,26 +1,31 @@
 
 include ./header
 
-main
-    div 
-        img(src='', alt='Aqui irá una imagen')
+main.containersignupmain
+    section.containersignupsection 
+        div#logo 
+            img(src='../static/img/obturador.svg', alt='Aqui irá una imagen')
 
-    form(action='/signup', method='POST') 
-        label(for='email')
-        br
-        input#email(type='email', name='email', placeholder='Email')
-        label(for='password')
-        br
-        input#password(type='password', name='password',
-        placeholder='Password')
-        br
-        button(type="submit") signup
-    p or 
-        br
-    div
-        button(type="submit") sign up Facebook
-        br
-        button(type="submit") sign up Google
+        form(action='/signup', method='POST') 
+            
+            div 
+                label(for='email') Email   
+                input#email(type='email', name='email', placeholder='Email')
+                
+            div  
+                label(for='password') Contraseña 
+                input#password(type='password', name='password',
+                placeholder='Password')
+            div    
+                button(type="submit") signup
+                p or 
+                
+            div
+                button(type="submit") sign up Facebook
+                br
+                button(type="submit") sign up Google
+
+script(src='../static/js/signUp.js')
 
 
 
