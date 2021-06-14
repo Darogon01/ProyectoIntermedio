@@ -26,8 +26,8 @@ const routes = {
     let data = await films.getPelicula(
       `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
     );
-    /* Aqui irán las promesas y metodos del scraping para la pagina film ?*/
-    /* res.status(200).render('film', Datos Scrapping) */ //datos Scrapping?
+    console.log(data, "data")
+    
     async function opinions() {
       const browser = await puppeteer.launch({ headless: false });
       const page = await browser.newPage();
@@ -67,8 +67,9 @@ console.log(coments)
 return coments
       
     }
-    let reviews = await opinions();
-    res.status(200).render("film", { data, comentarios: reviews });
+    /* let reviews = await opinions(); */
+    res.status(200).render("film", { data });
+    /* res.status(200).render("film", { data, comentarios: reviews }); */
     
   },
   search: async (req, res) => {
