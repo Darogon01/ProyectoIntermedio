@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-autoIncrement = require('mongoose-auto-increment')
+const autoIncrement = require('mongoose-auto-increment')
 let connection = mongoose.createConnection(process.env.DATABASE_URL)
 autoIncrement.initialize(connection)
 
@@ -14,7 +14,7 @@ const filmSchema = new Schema({
         type: String,
         validate: {
             validator: (text) => text.indexOf('https://') === 0,
-            message: 'Url debe comenzar por https://'
+            message: 'La Url debe comenzar por https://'
         }
     },
     year: {
