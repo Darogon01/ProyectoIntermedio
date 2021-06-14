@@ -1,23 +1,26 @@
-include ./header
 
-h1 Home
-
-    head
-        title Login Form
-    body
-        div 
-            img(src="", alt="Aquí va la imagen de entrada")
-
-        form(action = "/login" method = "POST")
-            label(for = "email") Email:
-            input(type = "email", id ="email")
-            br
-            label(for = "password") Contraseña:
-            input(type = "password", class = "password")
-            br
-            button(type="submit") Login 
-
-        div
-            button(type="submit") Google 
-            button(type="submit") Facebook 
-            button(type="submit") Sign Up 
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel="stylesheet", href="../static/css/style.css")
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  title Home
+form#login-form.login(action='')
+  header
+    img(src='./static/img/clapperboard.svg' alt='clapperboard')
+  .field
+    span.fa.fa-user
+    input#login-email(type='text' placeholder='Email')
+  .field
+    span.fa.fa-lock
+    input#login-password(type='password' placeholder='Password')
+  input.submit(type='submit' value='Iniciar sesión')
+  span.login-form-copy Or Login with
+  .social-icons
+    .social-icon.google
+      span.fa.fa-google
+      button#googleLogin(type='button')
+  span.login-form-copy
+    | Don&apos;t have an account?
+    a.login-form_sign-up(href='signup.pug') Sign up
