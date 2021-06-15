@@ -10,12 +10,12 @@ main.searchTitleMain
             p Duración: #{data.Runtime}
             p Año: #{data.Year}
             img.favoritesearchtitle(src="../static/img/favorite.svg", alt="favorite icon")
-    div
+    div.containersearchcoments
         h2 Sipnopsis
             p #{Plot}
-         h2 Opiniones
-          each val in comentarios 
-            p #{val} */
+        h2 Opiniones
+            each val in comentarios 
+                p #{val} 
 
             
 

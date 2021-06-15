@@ -67,9 +67,9 @@ console.log(coments)
 return coments
       
     }
-    /* let reviews = await opinions(); */
-    res.status(200).render("film", { data });
-    /* res.status(200).render("film", { data, comentarios: reviews }); */
+    let reviews = await opinions();
+    /* res.status(200).render("film", { data }); */
+    res.status(200).render("film", { data, comentarios: reviews });
     
   },
   search: async (req, res) => {
