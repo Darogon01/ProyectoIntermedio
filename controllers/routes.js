@@ -1,6 +1,6 @@
-const films = require("../utils/films");
-const Film = require("../models/Films");
-const User = require("../models/Users");
+const films = require('../utils/film')
+const Film = require('../models/Films')
+const User = require('../models/Users')
 const puppeteer = require("puppeteer");
 
 let apiKey = process.env.API_KEY;
@@ -190,16 +190,7 @@ const routes = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  },
-  deleteMovie: async (req, res) => {
-    let id = req.query.id;
-    try {
-      await Film.deleteOne({ filmId: id });
-      res.status(201).redirect(`/adminmovies`); //cambiar adminmovies por movies cuando esté listo el log de usuarios
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
-};
+}
+}
 
 module.exports = routes;
