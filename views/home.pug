@@ -20,7 +20,7 @@ form#login-form.login(action='/dashboard' method='post')
   .social-icons
     .social-icon.google
       span.fa.fa-google
-      button#googleLogin(type='button')
+      button#googleLogin(type='button' )
   span.login-form-copy
     | Don&apos;t have an account?
     a.login-form_sign-up(href='/signup') Sign up
@@ -34,6 +34,8 @@ script(src='https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js')
 script(src='https://www.gstatic.com/firebasejs/8.6.7/firestore.js')
 
 script(type="module" src='../static/js/google.js')
+
+div(id='userDetails')
 
 
  

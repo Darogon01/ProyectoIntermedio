@@ -3,62 +3,36 @@ firebase.initializeApp(firebaseConfig);
 
  let provider = new firebase.auth.GoogleAuthProvider();
 
-// const googleButton = document.querySelector('#googleLogin');
-// googleButton.addEventListener('click', e =>{
-//    const provider =  new firebase.auth.GoogleAuthProvider();
-//    auth.signInWithPopup(provider)
-//    .then(result => {
-//        console.log('google sign in')
-//    })
-//    .catch(err =>{
-//        console.log(err)
-//    })
-// })
+const googleButton = document.querySelector('#googleLogin');
+googleButton.addEventListener('click', e =>{
+   const provider =  new firebase.auth.GoogleAuthProvider();
+   firebase.auth().signInWithPopup(provider)
+   .then(result => {
+       console.log('google sign in');
+       showUserDetails(result.user);
 
-firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    let credential = result.credential;
+   })
+   .catch(err =>{
+       console.log(err)
+   })
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    let token = credential.accessToken;
-    // The signed-in user info.
-    let user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
+   firebase.auth().onAuthStateChanged(user => {
+    if(user) 
+    {
+       window.location = '/dashboard';
+    }
   });
-firebase.auth()
-.getRedirectResult()
-.then((result) => {
-  if (result.credential) {
-    /** @type {firebase.auth.OAuthCredential} */
-    let credential = result.credential;
+})
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    let token = credential.accessToken;
-    // ...
-  }
-  // The signed-in user info.
-  let user = result.user;
-}).catch((error) => {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
+
+function showUserDetails(user){
+  document.getElementById('userDetails').innerHTML = `
+    <img src="${user.photoURL}" style="width:10%">
+    <p>Name: ${user.displayName}</p>
+    <p>Email: ${user.email}</p>
+  `
+}
+
 
 
 
