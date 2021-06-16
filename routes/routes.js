@@ -11,7 +11,8 @@ router.get('/adminMovies', pages.adminMovies) //CAMBIAR ENDPOINT CUANDO TENGAMOS
 router.get('/createMovie', pages.createMovieGet)
 router.post('/createMovie', pages.createMoviePost)
 router.get('/editMovie/:id', pages.editMovieGet)
-router.post('/editMovie', pages.editMoviePut) //CONSULTAR POR QUE NO FUNCIONA CON PUT
-router.get('/removeMovie', pages.deleteMovie)
+router.put('/editMovie', pages.editMoviePut) //CONSULTAR POR QUE NO FUNCIONA CON PUT
+router.delete('/removeMovie', pages.deleteMovie)
+router.post('/favorite', pages.favorite)
 
 module.exports = router
