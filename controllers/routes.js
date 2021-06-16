@@ -123,7 +123,7 @@ const routes = {
         }
     },
     deleteMovie: async(req, res) => {
-        let id = req.query.id
+        let id = req.body.id
         try {
             await Film.deleteOne({ "filmId": id })
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
