@@ -22,6 +22,7 @@ const routes = {
     let title = req.params.title;
     let titleMayus = capitalizarPrimeraLetra(title);
     function capitalizarPrimeraLetra(str) {
+      console.log(str)
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
@@ -55,7 +56,7 @@ const routes = {
         const opinions = document.querySelectorAll(
           ".content-txt.review-card-content"
         );
-        console.log(opinions);
+        /* console.log(opinions); */
         const dataComent = [];
 
         opinions.forEach((cometarios) => {
@@ -68,26 +69,28 @@ const routes = {
       console.log(coments);
       return coments;
     }
-    async function opinions() {
+    async function opinions2() {
       const browser = await puppeteer.launch({ headless: false });
       const page = await browser.newPage();
       await page.goto(`https://www.filmaffinity.com/es/main.html`);
+      await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
+      await page.click("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
       await page.waitForSelector("#top-search-input");
       await page.click("#top-search-input");
       await page.type("#top-search-input", titleMayus);
-      await page.waitForSelector(
-        `#ui-id-1 > #ui-id-44 > img[alt=${titleMayus}]`
-      );
-      await page.click(
-        `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
-      );
-      await page.waitForSelector(".content-txt.review-card-content");
-      /* const opinions = document.querySelectorAll(
-            ".content-txt.review-card-content"); */
+    /*   await page.waitForSelector(
+         `#ui-id-19 > img`
+      ); */
+     /*  await page.click(
+         `#ui-id-22 > img[alt=${titleMayus}]`  `#ui-id-19 > img[alt=${titleMayus}]`
+      ); */
+      await page.keyboard.press('Enter');
+      await page.waitForSelector("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
+      await page.click("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
       const coments = await page.evaluate(() => {
         console.log("estamos dentro");
         const opinions = document.querySelectorAll(
-          ".content-txt.review-card-content"
+          'div[itemprop=reviewBody]'
         );
         console.log(opinions);
         const dataComent = [];
@@ -104,7 +107,7 @@ const routes = {
     }
 
     
-    let reviews = await opinions();
+    /* let reviews = await opinions(); */
     let reviews2 = await opinions2();
     /* res.status(200).render("film", { data }); */
 
@@ -190,7 +193,19 @@ const routes = {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
+},
+deleteMovie: async(req, res) => {
+  let id = req.query.id
+  try {
+      await Film.deleteOne({ "filmId": id })
+      res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+  } catch (err) {
+      res.status(500).json({ message: err.message })
+  }
 }
 }
+
+
+
 
 module.exports = routes;
