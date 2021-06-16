@@ -1,5 +1,7 @@
-const films = require('../utils/films')
+const films = require('../utils/film')
 const Film = require('../models/Films')
+const User = require('../models/Users')
+const puppeteer = require("puppeteer");
 
 
 
@@ -18,9 +20,37 @@ const routes = {
         res.status(200).render('dashboard')
     },
     film: async(req, res) => {
-        let title = req.params.title
-        let data = await films.getPelicula(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`)
-        res.status(200).render('film', data)
+        let title = req.params.title;
+        let capitalizarPrimeraLetra = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+        let titleMayus = capitalizarPrimeraLetra(title);
+        let data = await films.getPelicula(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`);
+        async function opinions() {
+            const browser = await puppeteer.launch();
+            const page = await browser.newPage();
+            await page.goto(`https://www.sensacine.com`);
+            await page.waitForSelector("#didomi-notice-agree-button");
+            await page.click("#didomi-notice-agree-button");
+            await page.waitForSelector("#header-main-mobile-btn-search");
+            await page.click("#header-main-mobile-btn-search");
+            await page.waitForSelector("#header-search-input");
+            await page.type("#header-search-input", titleMayus);
+            await page.waitForSelector(`#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`);
+            await page.click(`#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`);
+            await page.waitForSelector(".content-txt.review-card-content");
+            const coments = await page.evaluate(() => {
+                const opinions = document.querySelectorAll(
+                    ".content-txt.review-card-content"
+                );
+                const dataComent = [];
+                opinions.forEach((cometarios) => {
+                    dataComent.push(cometarios.innerText);
+                });
+                return dataComent;
+            });
+            return coments
+        }
+        let reviews = await opinions();
+        res.status(200).render("film", { data, comentarios: reviews });
     },
     movies: async(req, res) => {
         // SUSTITUIR POR LA RESPUESTA DE LA BBDD DE FAVORITOS
@@ -35,8 +65,6 @@ const routes = {
         }
         let data = await getFilms()
         res.status(200).render('movies', { data })
-
-
     },
     search: async(req, res) => {
         // SUSTITUIR POR LA RESPUESTA DE LA BBDD
@@ -69,9 +97,6 @@ const routes = {
             const newFilm = await film.save()
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
         } catch (err) {
-            // res.status(400).json({ message: err, data: film })
-            // console.log(err)
-
             res.status(400).render('createmovie', { message: err, data: film })
         }
     },
@@ -81,7 +106,7 @@ const routes = {
             const data = await Film.find({ "filmId": id })
             res.status(200).render('editmovie', data[0])
         } catch (err) {
-            res.status(400).json({ message: err.message })
+            res.status(500).json({ message: err.message })
         }
     },
     editMoviePut: async(req, res) => {
@@ -90,11 +115,11 @@ const routes = {
         try {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
-                    if (err) return res.status(500).send(err.errors.urlImage.message)
+                    if (err) return res.status(400).render('editmovie', { message: err, data: film })
                     return res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
                 })
         } catch (err) {
-            res.status(400).json({ message: err.message })
+            res.status(500).json({ message: err.message })
         }
     },
     deleteMovie: async(req, res) => {
@@ -108,4 +133,4 @@ const routes = {
     }
 }
 
-module.exports = routes
+module.exports = routes;

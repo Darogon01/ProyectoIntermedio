@@ -1,18 +1,18 @@
 /* ------------------- ESTILOS GENERALES ------------------- */
 
-h2 {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-/* header {
+header {
     height: 8vh;
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid black;
     padding: 10px;
-} */
+}
+
+h2 {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
 .drop {
     display: none;
@@ -51,43 +51,41 @@ input:checked~label {
     background: lightgrey;
 }
 
+
 /*--------------------ESTILOS DE LA PAGINA MAIN-----------------------*/
 
-.login{
+#home .login {
     position: absolute;
     top: 50%;
-    left:50%;
+    left: 50%;
     right: -30%;
     transform: translate(-50%, -50%);
     padding: 40px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(0, 0, 0,0.7);
+    background-color: rgb(0, 0, 0, 0.7);
     border-radius: 5px;
-    box-shadow: 1px 1px 20px white ;
+    box-shadow: 1px 1px 20px white;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto
-
 }
 
-.login header{
+#home .login header {
     margin-bottom: 25px;
     margin: 0 0 25px 0;
-
 }
 
-img{
+#home img {
     position: relative;
     width: 100%;
     top: 50%;
     border-radius: 50%;
     box-shadow: 1px 1px 15px whitesmoke;
-   
 }
 
-.field{
+#home .field {
     border: 1px solid whitesmoke;
     border-radius: 50px;
     background-color: transparent;
@@ -96,15 +94,14 @@ img{
     display: flex;
 }
 
-.field span{
+#home .field span {
     color: white;
     width: 40px;
     line-height: 45px;
     text-align: center;
-
 }
 
-.field input{
+#home .field input {
     width: 100%;
     height: 45px;
     font-size: 1.1rem;
@@ -114,20 +111,21 @@ img{
     border: none;
 }
 
-.forgot-password{
+#home .forgot-password {
     width: 100%;
     margin-bottom: 15px;
 }
-.forgot-password a{
+
+#home .forgot-password a {
     color: white;
     text-decoration: none;
 }
 
-.forgot-password a:hover{
+#home .forgot-password a:hover {
     text-decoration: underline;
 }
 
-.submit{
+#home .submit {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -141,53 +139,55 @@ img{
     border-radius: 125px;
 }
 
-.submit:hover{
+#home .submit:hover {
     cursor: pointer;
     background-color: rgb(16, 16, 61);
 }
 
-.login-form-copy{
+#home .login-form-copy {
     margin-bottom: 15px;
 }
 
-.login-form_sign-up{
+#home .login-form_sign-up {
     text-decoration: none;
-    color:red;
+    color: red;
 }
-.social-icons{
+
+#home .social-icons {
     display: flex;
     width: 100%;
     justify-content: center;
     padding-bottom: 5px;
 }
 
-.social-icon{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4rem;
-  width: 50px;
-  cursor: pointer;
-  height: 50px;  
+#home .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    width: 50px;
+    cursor: pointer;
+    height: 50px;
 }
-.facebook{
+
+#home .facebook {
     background-color: #385998;
 }
-.google{
+
+#home .google {
     background-color: #ca3224;
 }
 
-input:focus,input:hover, input:active{
+#home input:focus, input:hover, input:active {
     outline: none;
 }
 
-#googleLogin {
-    display:inline;
+#home #googleLogin {
+    display: inline;
     background-color: #ca3224;
     border: none;
-    
-    
 }
+
 
 /* ------------------- ESTILOS ERRORES VALIDACIÓN ------------------- */
 
@@ -259,6 +259,64 @@ input:focus,input:hover, input:active{
     width: 30vw;
     height: fit-content;
     border-radius: 5px;
+}
+
+#usrMovies img.favorite {
+    width: 15vw;
+    margin-top: auto;
+}
+
+#usrMovies .info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 45vw;
+}
+
+
+/* ------------------- ESTILOS FILM  ------------------- */
+
+.searchTitleMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+.wraperserchtitle {
+    display: flex;
+}
+
+.containersearchfilm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 0 1rem;
+}
+
+.containersearchfilm h2 {
+    margin: 0.3rem;
+}
+
+.containersearchfilm p {
+    margin: 0.3rem;
+}
+
+.postersearchtitle {
+    width: 40vw;
+    border-radius: 5px;
+}
+
+.favoritesearchtitle {
+    width: 10vw;
+}
+
+.containersearchcoments p {
+    margin-bottom: 1rem;
 }
 
 #usrMovies button.favorite {
