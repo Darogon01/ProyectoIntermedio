@@ -28,14 +28,25 @@ listElements.forEach(li => {
                     title: `Borrada`,
                     text: `${title} ha sido borrada`,
                     icon: 'success',
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     showClass: {
                         backdrop: 'swal2-noanimation',
                         popup: ''
                     },
                 }).then(() => {
-                    window.location.href = `/removeMovie?id=${filmId}`
+                    let deleteMovie = async(data) => {
+                        const response = await fetch('/removeMovie', {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        return response
+                    }
+                    deleteMovie({ id: filmId })
+                        .then(() => { window.location.href = `/adminmovies` }) //cambiar adminmovies por movies cuando esté listo el log de usuarios
                 })
             }
         })
