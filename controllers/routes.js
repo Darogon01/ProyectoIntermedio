@@ -53,9 +53,9 @@ const routes = {
         res.status(200).render("film", { data, comentarios: reviews });
     },
     movies: async(req, res) => {
-        // SUSTITUIR POR LA RESPUESTA DE LA BBDD DE FAVORITOS
-        let arrFavoritas = ["tt1216475", "tt4029846", "tt10222892", "tt0401383"]
-
+        // let arrFavoritas = ["tt1216475", "tt4029846", "tt10222892", "tt0401383"]
+        let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+        let arrFavoritas = favs.map(fav => Object.values(fav))
         let getFilms = async() => {
             let pelis = arrFavoritas.map(async(filmID) => {
                 let data = await films.getPelicula(`http://www.omdbapi.com/?i=${filmID}&apikey=${apiKey}`)
@@ -127,6 +127,24 @@ const routes = {
         try {
             await Film.deleteOne({ "filmId": id })
             res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+        } catch (err) {
+            res.status(500).json({ message: err.message })
+        }
+    },
+    favorite: async(req, res) => {
+        let email = req.body.email
+        let api_id_film = req.body.api_id_film
+        try {
+            let favorite = await User.searchFavorite(email, api_id_film)
+            let id_film = favorite[0] != undefined ? favorite[0].id_film : false
+            if (id_film) {
+                console.log(`existe`)
+                await User.removeFavorite(email, api_id_film)
+            } else {
+                console.log(`no existe`)
+                await User.addFavorite(email, api_id_film)
+            }
+            return res.status(201).redirect(`/movies`)
         } catch (err) {
             res.status(500).json({ message: err.message })
         }
