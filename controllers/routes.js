@@ -31,7 +31,7 @@ const routes = {
     );
     console.log(data, "data");
 
-    async function opinions() {
+    async function opinionsSensa() {
       const browser = await puppeteer.launch({ headless: false });
       const page = await browser.newPage();
       await page.goto(`https://www.sensacine.com`);
@@ -57,19 +57,19 @@ const routes = {
           ".content-txt.review-card-content"
         );
         /* console.log(opinions); */
-        const dataComent = [];
+        const dataComentSensa = [];
 
-        opinions.forEach((cometarios) => {
-          console.log(cometarios);
-          dataComent.push(cometarios.innerText);
+        opinions.forEach((comentarios) => {
+          console.log(comentarios);
+          dataComentSensa.push(comentarios.innerText);
         });
 
-        return dataComent;
+        return dataComentSensa;
       });
       console.log(coments);
       return coments;
     }
-    async function opinions2() {
+    async function opinionsAfinity() {
       const browser = await puppeteer.launch({ headless: false });
       const page = await browser.newPage();
       await page.goto(`https://www.filmaffinity.com/es/main.html`);
@@ -78,40 +78,35 @@ const routes = {
       await page.waitForSelector("#top-search-input");
       await page.click("#top-search-input");
       await page.type("#top-search-input", titleMayus);
-    /*   await page.waitForSelector(
-         `#ui-id-19 > img`
-      ); */
-     /*  await page.click(
-         `#ui-id-22 > img[alt=${titleMayus}]`  `#ui-id-19 > img[alt=${titleMayus}]`
-      ); */
       await page.keyboard.press('Enter');
       await page.waitForSelector("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
       await page.click("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
+      await page.waitForSelector('div[itemprop=reviewBody]');
       const coments = await page.evaluate(() => {
         console.log("estamos dentro");
-        const opinions = document.querySelectorAll(
+        const opinionsAfinity = document.querySelectorAll(
           'div[itemprop=reviewBody]'
         );
-        console.log(opinions);
-        const dataComent = [];
+        console.log(opinionsAfinity);
+        const dataComentAfinity = [];
 
-        opinions.forEach((cometarios) => {
-          console.log(cometarios);
-          dataComent.push(cometarios.innerText);
+        opinionsAfinity.forEach((comentarios) => {
+          console.log(comentarios);
+          dataComentAfinity.push(comentarios.innerText);
         });
 
-        return dataComent;
+        return dataComentAfinity;
       });
       console.log(coments);
       return coments;
     }
 
     
-    /* let reviews = await opinions(); */
-    let reviews2 = await opinions2();
+    let reviewsSensa = await opinionsSensa();
+    let reviewsAfinity = await opinionsAfinity();
     /* res.status(200).render("film", { data }); */
 
-    res.status(200).render("film", { data, comentarios: reviews });
+    res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
   },
   movies: async (req, res) => {
     // SUSTITUIR POR LA RESPUESTA DE LA BBDD DE FAVORITOS
