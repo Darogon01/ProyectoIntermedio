@@ -4,29 +4,48 @@ head
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Document
-form(action='#' method='post')
+form(action='/search' method='post')
   input(type='search' name='busqueda' placeholder='Título de película...')
   
-button(type='submit' id='btn-search' class='btn-success') Buscar Película
-    a(href="/search")
+  input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
+  
+  each val in filmsdata 
+    div 
+      img(src=val.Poster, alt="")
+    div(class='info')
+              p #{val.Title}
+              p #{val.Year}
+              p #{val.Director}
+              p #{val.Genre}
+              p #{val.Runtime}
+
+
+     
+                
+              
+     
+                
+
+     
+    
        
-    //- if Response == "True"
-    //-     h1 #{Title} 
-    //-     div.content
-    //-         img(src=#, alt="portada")
-    //-         div.description
-    //-         p 
-    //-             strong Título: 
-    //-         p #{film.Title}
-    //-         p 
-    //-             strong Director: 
-    //-         p #{film.director}
-    //-         p 
-    //-             strong Género: 
-    //-         p  #{film.genre}
-    //-         p 
-    //-             strong Duración: 
-    //-         p  #{film.Runtime}
-    //- else
-    //-     p El título introducido no existe
+//- if Response == "True"
+//-     h1 #{data.Title} 
+//-     div.content
+//-         
+//-         div.description
+//-         p 
+//-             strong Título: 
+//-         p #{data.Title}
+//-         p 
+//-             strong Director: 
+//-         p #{data.Director}
+//-         p 
+//-             strong Género: 
+//-         p  #{data.Genre}
+//-         p 
+//-             strong Duración: 
+//-         p  #{data.Runtime}
+//- else
+//-     p El título introducido no existe
             
