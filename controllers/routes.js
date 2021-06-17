@@ -21,6 +21,7 @@ const routes = {
   film: async (req, res) => {
     let title = req.params.title;
     let titleMayus = capitalizarPrimeraLetra(title);
+    console.log(titleMayus)
     function capitalizarPrimeraLetra(str) {
       console.log(str)
       return str.charAt(0).toUpperCase() + str.slice(1);
