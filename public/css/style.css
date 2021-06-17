@@ -321,6 +321,7 @@ nav li:hover {
     margin: 5px;
     border: solid 1px black;
     border-radius: 5px;
+    justify-content: space-between;
 }
 
 #usrMovies div.card {

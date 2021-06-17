@@ -27,7 +27,7 @@ const routes = {
             `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
         async function opinionsSensa() {
-            const browser = await puppeteer.launch({ headless: false });
+            const browser = await puppeteer.launch( /*{ headless: false }*/ );
             const page = await browser.newPage();
             await page.goto(`https://www.sensacine.com`);
             await page.waitForSelector("#didomi-notice-agree-button");
@@ -35,7 +35,7 @@ const routes = {
             await page.waitForSelector("#header-main-mobile-btn-search");
             await page.click("#header-main-mobile-btn-search");
             await page.waitForSelector("#header-search-input");
-            await page.type("#header-search-input", titleMayus);
+            await page.type("#header-search-input", `                       ${titleMayus}`);
             await page.waitForSelector(
                 `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
             );
@@ -43,8 +43,6 @@ const routes = {
                 `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
             );
             await page.waitForSelector(".content-txt.review-card-content");
-            /* const opinions = document.querySelectorAll(
-                  ".content-txt.review-card-content"); */
             const coments = await page.evaluate(() => {
                 const opinions = document.querySelectorAll(
                     ".content-txt.review-card-content"
@@ -59,7 +57,7 @@ const routes = {
             return coments;
         }
         async function opinionsAfinity() {
-            const browser = await puppeteer.launch({ headless: false });
+            const browser = await puppeteer.launch( /*{ headless: false }*/ );
             const page = await browser.newPage();
             await page.goto(`https://www.filmaffinity.com/es/main.html`);
             await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
@@ -90,7 +88,6 @@ const routes = {
         res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
     },
     movies: async(req, res) => {
-        // let arrFavoritas = ["tt1216475", "tt4029846", "tt10222892", "tt0401383"]
         let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
         let arrFavoritasApi = []
         let arrFavoritasDB = []
@@ -139,38 +136,39 @@ const routes = {
         res.status(200).render('movies', { favorites })
     },
     search: async(req, res) => {
-        // SUSTITUIR POR LA RESPUESTA DE LA BBDD
         if (req.method == "GET") {
             res.status(200).render("search");
         } else {
             let titulo = req.body.busqueda;
             let getFilmsIds = async(title) => {
                 let arrayIds = [];
-
                 let data = await films.getPelicula(
-                    `http://www.omdbapi.com/?s=${title}&apikey=${apiKey}`
+                    `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${apiKey}`
                 );
-
                 data.Search.forEach((movie) => {
                     arrayIds.push(movie.imdbID);
                 });
                 return arrayIds;
-
-                //   return Promise.all(pelis);
             };
             let getFilms = async(arr) => {
                 let pelis = arr.map(async(filmID) => {
                     let data = await films.getPelicula(
                         `http://www.omdbapi.com/?i=${filmID}&apikey=${apiKey}`
                     );
-
                     return data;
                 });
-
                 return Promise.all(pelis);
             };
             const filmsIds = await getFilmsIds(titulo);
-            const filmsdata = await getFilms(filmsIds)
+            let filmsdata = await getFilms(filmsIds)
+            let allDataFavs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+            let idsFavs = []
+            allDataFavs.forEach(film => {
+                idsFavs.push(film.api_id_film)
+            })
+            filmsdata.forEach(film => {
+                idsFavs.includes(film.imdbID) ? film.favorite = "fav" : film.favorite = "noFav"
+            })
             res.status(200).render("search", { filmsdata });
         }
     },
