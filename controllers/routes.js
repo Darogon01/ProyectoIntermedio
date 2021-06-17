@@ -16,94 +16,95 @@ const routes = {
     dashboard: (req, res) => {
         res.status(200).render('dashboard')
     },
-    film: async (req, res) => {
-    let title = req.params.title;
-    let titleMayus = capitalizarPrimeraLetra(title);
-    function capitalizarPrimeraLetra(str) {
-      console.log(str)
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
+    film: async(req, res) => {
+        let title = req.params.title;
+        let titleMayus = capitalizarPrimeraLetra(title);
 
-    let data = await films.getPelicula(
-      `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
-    );
-    console.log(data, "data");
+        function capitalizarPrimeraLetra(str) {
+            console.log(str)
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
 
-    async function opinionsSensa() {
-      const browser = await puppeteer.launch({ headless: false });
-      const page = await browser.newPage();
-      await page.goto(`https://www.sensacine.com`);
-      await page.waitForSelector("#didomi-notice-agree-button");
-      await page.click("#didomi-notice-agree-button");
-      await page.waitForSelector("#header-main-mobile-btn-search");
-      await page.click("#header-main-mobile-btn-search");
-      await page.waitForSelector("#header-search-input");
-
-      await page.type("#header-search-input", titleMayus);
-      await page.waitForSelector(
-        `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
-      );
-      await page.click(
-        `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
-      );
-      await page.waitForSelector(".content-txt.review-card-content");
-      /* const opinions = document.querySelectorAll(
-            ".content-txt.review-card-content"); */
-      const coments = await page.evaluate(() => {
-        console.log("estamos dentro");
-        const opinions = document.querySelectorAll(
-          ".content-txt.review-card-content"
+        let data = await films.getPelicula(
+            `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
-        /* console.log(opinions); */
-        const dataComentSensa = [];
+        console.log(data, "data");
 
-        opinions.forEach((comentarios) => {
-          console.log(comentarios);
-          dataComentSensa.push(comentarios.innerText);
-        });
+        async function opinionsSensa() {
+            const browser = await puppeteer.launch({ headless: false });
+            const page = await browser.newPage();
+            await page.goto(`https://www.sensacine.com`);
+            await page.waitForSelector("#didomi-notice-agree-button");
+            await page.click("#didomi-notice-agree-button");
+            await page.waitForSelector("#header-main-mobile-btn-search");
+            await page.click("#header-main-mobile-btn-search");
+            await page.waitForSelector("#header-search-input");
 
-        return dataComentSensa;
-      });
-      console.log(coments);
-      return coments;
-    }
-    async function opinionsAfinity() {
-      const browser = await puppeteer.launch({ headless: false });
-      const page = await browser.newPage();
-      await page.goto(`https://www.filmaffinity.com/es/main.html`);
-      await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
-      await page.click("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
-      await page.waitForSelector("#top-search-input");
-      await page.click("#top-search-input");
-      await page.type("#top-search-input", titleMayus);
-      await page.keyboard.press('Enter');
-      await page.waitForSelector("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
-      await page.click("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
-      await page.waitForSelector('div[itemprop=reviewBody]');
-      const coments = await page.evaluate(() => {
-        console.log("estamos dentro");
-        const opinionsAfinity = document.querySelectorAll(
-          'div[itemprop=reviewBody]'
-        );
-        console.log(opinionsAfinity);
-        const dataComentAfinity = [];
+            await page.type("#header-search-input", titleMayus);
+            await page.waitForSelector(
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+            );
+            await page.click(
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+            );
+            await page.waitForSelector(".content-txt.review-card-content");
+            /* const opinions = document.querySelectorAll(
+                  ".content-txt.review-card-content"); */
+            const coments = await page.evaluate(() => {
+                console.log("estamos dentro");
+                const opinions = document.querySelectorAll(
+                    ".content-txt.review-card-content"
+                );
+                /* console.log(opinions); */
+                const dataComentSensa = [];
 
-        opinionsAfinity.forEach((comentarios) => {
-          console.log(comentarios);
-          dataComentAfinity.push(comentarios.innerText);
-        });
+                opinions.forEach((comentarios) => {
+                    console.log(comentarios);
+                    dataComentSensa.push(comentarios.innerText);
+                });
 
-        return dataComentAfinity;
-      });
-      console.log(coments);
-      return coments;
-    }
+                return dataComentSensa;
+            });
+            console.log(coments);
+            return coments;
+        }
+        async function opinionsAfinity() {
+            const browser = await puppeteer.launch({ headless: false });
+            const page = await browser.newPage();
+            await page.goto(`https://www.filmaffinity.com/es/main.html`);
+            await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
+            await page.click("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
+            await page.waitForSelector("#top-search-input");
+            await page.click("#top-search-input");
+            await page.type("#top-search-input", titleMayus);
+            await page.keyboard.press('Enter');
+            await page.waitForSelector("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
+            await page.click("#title-result > div > div:nth-child(2) > div.fa-shadow-nb.item-search > div > div.mc-poster > a > img");
+            await page.waitForSelector('div[itemprop=reviewBody]');
+            const coments = await page.evaluate(() => {
+                console.log("estamos dentro");
+                const opinionsAfinity = document.querySelectorAll(
+                    'div[itemprop=reviewBody]'
+                );
+                console.log(opinionsAfinity);
+                const dataComentAfinity = [];
 
-    
-    let reviewsSensa = await opinionsSensa();
-    let reviewsAfinity = await opinionsAfinity();
-    res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
-  },
+                opinionsAfinity.forEach((comentarios) => {
+                    console.log(comentarios);
+                    dataComentAfinity.push(comentarios.innerText);
+                });
+
+                return dataComentAfinity;
+            });
+            console.log(coments);
+            return coments;
+        }
+
+
+        let reviewsSensa = await opinionsSensa();
+        let reviewsAfinity = await opinionsAfinity();
+        res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
+    },
     movies: async(req, res) => {
         // let arrFavoritas = ["tt1216475", "tt4029846", "tt10222892", "tt0401383"]
         let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
@@ -200,17 +201,16 @@ const routes = {
         } catch (err) {
             res.status(500).json({ message: err.message })
         }
+    },
+    deleteMovie: async(req, res) => {
+        let id = req.query.id
+        try {
+            await Film.deleteOne({ "filmId": id })
+            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+        } catch (err) {
+            res.status(500).json({ message: err.message })
+        }
     }
-},
-deleteMovie: async(req, res) => {
-  let id = req.query.id
-  try {
-      await Film.deleteOne({ "filmId": id })
-      res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
-  } catch (err) {
-      res.status(500).json({ message: err.message })
-  }
-}
 }
 
 
