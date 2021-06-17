@@ -1,26 +1,20 @@
-doctype html
-head
-  meta(charset='UTF-8')
-  meta(http-equiv='X-UA-Compatible' content='IE=edge')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Document
+include ./header
+
 form(action='/search' method='post')
   input(type='search' name='busqueda' placeholder='Título de película...')
   
   input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
-  
+
+if filmsdata  
   each val in filmsdata 
     div 
       img(src=val.Poster, alt="")
     div(class='info')
-              p #{val.Title}
-              p #{val.Year}
-              p #{val.Director}
-              p #{val.Genre}
-              p #{val.Runtime}
-
-
-     
+      p #{val.Title}
+      p #{val.Year}
+      p #{val.Director}
+      p #{val.Genre}
+      p #{val.Runtime}
                 
               
      

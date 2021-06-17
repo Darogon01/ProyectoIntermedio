@@ -2,9 +2,9 @@ include ./header
 
 main#usrMovies
     ul
-        each film in data
-            li(class=film.imdbID)
-                div(id=film.imdbID).card
+        each film in favorites
+            li(class=`idFilm_${film.imdbID}`)
+                div(id=`idFilm_${film.imdbID}`).card
                     img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
                     div.info
                         h2 #{film.Title}
@@ -20,7 +20,7 @@ main#usrMovies
                         p 
                             strong Duración: 
                             | #{film.Runtime}
-                button(class=`favorite ${film.imdbID}`)
+                button(class=`favorite idFilm_${film.imdbID}`)
                     img(src="../static/img/favorite.svg", alt="favorite icon")
                 
 script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
