@@ -1,45 +1,37 @@
 include ./header
 
-form(action='/search' method='post')
-  input(type='search' name='busqueda' placeholder='Título de película...')
-  
-  input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
+main#usrMovies
 
-if filmsdata  
-  each val in filmsdata 
-    div 
-      img(src=val.Poster, alt="")
-    div(class='info')
-      p #{val.Title}
-      p #{val.Year}
-      p #{val.Director}
-      p #{val.Genre}
-      p #{val.Runtime}
-                
-              
-     
-                
+  form(action='/search' method='post')
+    input(type='search' name='busqueda' placeholder='Título de película...')    
+    input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
 
-     
-    
-       
-//- if Response == "True"
-//-     h1 #{data.Title} 
-//-     div.content
-//-         
-//-         div.description
-//-         p 
-//-             strong Título: 
-//-         p #{data.Title}
-//-         p 
-//-             strong Director: 
-//-         p #{data.Director}
-//-         p 
-//-             strong Género: 
-//-         p  #{data.Genre}
-//-         p 
-//-             strong Duración: 
-//-         p  #{data.Runtime}
-//- else
-//-     p El título introducido no existe
-            
+  if filmsdata  
+    ul
+      each film in filmsdata
+        li(class=`idFilm_${film.imdbID}`)
+          div(id=`idFilm_${film.imdbID}`).card
+            img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
+            div.info
+              h2 #{film.Title}
+              p 
+                strong Año:
+                |  #{film.Year}
+              p 
+                strong Director: 
+                | #{film.Director}
+              p 
+                strong Género: 
+                | #{film.Genre}
+              p 
+                strong Duración: 
+                | #{film.Runtime}
+          if film.favorite == "fav"            
+            button(class=`favorite idFilm_${film.imdbID} fav`)
+              img(src="../static/img/favorite.svg", alt="favorite icon")
+          else
+            button(class=`favorite idFilm_${film.imdbID} nofav`)
+              img(src="../static/img/nofavorite.svg", alt="favorite icon")
+
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+script(src='../static/js/searchMovies.js')              
