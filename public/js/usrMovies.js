@@ -21,15 +21,25 @@ listElements.forEach(li => {
                     title: `Eliminada`,
                     text: `${title} ha sido eliminada de tus favoritos`,
                     icon: 'success',
-                    timer: 2000,
+                    timer: 1000,
                     timerProgressBar: true,
                     showClass: {
                         backdrop: 'swal2-noanimation',
                         popup: ''
                     },
                 }).then(() => {
-                    console.log(`Eliminada`)
-                        // LÓGICA DE ELIMINACIÓN
+                    let postData = async(data) => {
+                        const response = await fetch('/favorite', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        return response
+                    }
+                    postData({ email: "juanma@mail.co", api_id_film: li.className }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+                        .then(() => { window.location.href = `/movies` })
                 })
             }
         })

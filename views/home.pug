@@ -6,6 +6,41 @@ head
   link(rel="stylesheet", href="../static/css/style.css")
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   title Home
+
+form#login-form.login(action='/dashboard' method='post')
+  header
+    img(src='./static/img/clapperboard.svg' alt='clapperboard')
+  .field
+    span.fa.fa-user
+    input#login-email(type='text' placeholder='Email')
+  .field
+    span.fa.fa-lock
+    input#login-password(type='password' placeholder='Password')
+  input.submit(type='submit' value='Iniciar sesión')
+  span.login-form-copy Or Login with
+  .social-icons
+    .social-icon.google
+      span.fa.fa-google
+      button#googleLogin(type='button' )
+  span.login-form-copy
+    | Don&apos;t have an account?
+    a.login-form_sign-up(href='/signup') Sign up
+
+// The core Firebase JS SDK is always required and must be listed first
+script(src='https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js')
+//
+  TODO: Add SDKs for Firebase products that you want to use
+  https://firebase.google.com/docs/web/setup#available-libraries
+script(src='https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js')
+script(src='https://www.gstatic.com/firebasejs/8.6.7/firestore.js')
+
+script(type="module" src='../static/js/google.js')
+
+div(id='userDetails')
+
+
+ 
+
 body#home
   form#login-form.login(action='')
     header
@@ -25,3 +60,4 @@ body#home
     span.login-form-copy
       | Don&apos;t have an account?
       a.login-form_sign-up(href='signup.pug') Sign up
+
