@@ -1,12 +1,13 @@
 /* ------------------- ESTILOS GENERALES ------------------- */
 
-header {
+
+/* header {
     height: 8vh;
     display: flex;
     justify-content: flex-end;
     border-bottom: 1px solid black;
     padding: 10px;
-}
+} */
 
 h2 {
     font-size: 1.1em;
@@ -189,6 +190,77 @@ input:checked~label {
 }
 
 
+/*---------------------MENU DESPLEGABLE------------------------------*/
+
+nav#contenedor {
+    margin-top: 5px;
+    position: static;
+    padding: 10px;
+}
+
+nav ul {
+    display: none;
+}
+
+nav input:checked~ul {
+    display: block;
+}
+
+nav input {
+    display: none;
+}
+
+nav label {
+    box-sizing: border-box;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 54px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+}
+
+
+/* Estilo del boton cuando se pasa el mouse por encima*/
+
+nav label:hover {
+    background: grey;
+}
+
+
+/* Estilo del boton cuando el menú está expandido*/
+
+nav input:checked~label {
+    background: lightgrey;
+}
+
+nav ul {
+    margin-top: 0;
+    padding: 0;
+    width: 95%;
+}
+
+nav li {
+    display: block;
+    background: lightgrey;
+    margin-right: -21px;
+    padding: 10px;
+    list-style: none;
+    border-bottom: 1px solid grey;
+    text-align: center;
+}
+
+
+/*Estilo cuando el mouse pasa encima de cada link del menu*/
+
+nav li:hover {
+    filter: brightness(110%);
+}
+
+
 /* ------------------- ESTILOS ERRORES VALIDACIÓN ------------------- */
 
 .err, .err::placeholder {
@@ -249,6 +321,7 @@ input:checked~label {
     margin: 5px;
     border: solid 1px black;
     border-radius: 5px;
+    justify-content: space-between;
 }
 
 #usrMovies div.card {
