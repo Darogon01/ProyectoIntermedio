@@ -164,8 +164,8 @@ const routes = {
       };
 
     const filmsIds = await getFilmsIds(titulo);
-    const filmsdata = await getFilms(filmsIds)
-    console.log(filmsdata)
+    const filmsdata = await getFilms(filmsIds);
+    console.log(filmsdata);
 
   
     res.status(200).render("search", {filmsdata});

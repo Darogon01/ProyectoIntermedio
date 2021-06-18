@@ -3,21 +3,26 @@ head
   meta(charset='UTF-8')
   meta(http-equiv='X-UA-Compatible' content='IE=edge')
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel="stylesheet", href="../static/css/style.css")
+  
+ 
   title Document
-form(action='/search' method='post')
+form#search.movies(action='/search' method='post' class='search')
   input(type='search' name='busqueda' placeholder='Título de película...')
   
   input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
   
+  
   each val in filmsdata 
-    div 
-      img(src=val.Poster, alt="")
-    div(class='info')
-              p #{val.Title}
-              p #{val.Year}
-              p #{val.Director}
-              p #{val.Genre}
-              p #{val.Runtime}
+    article(class='tarjeta')
+      div(class='poster')
+        img(src=val.Poster, alt="Poseter de la película")
+      div(class='info')
+                p #{val.Title}
+                p #{val.Year}
+                p #{val.Director}
+                p #{val.Genre}
+                p #{val.Runtime}
 
 
      
