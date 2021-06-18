@@ -19,7 +19,6 @@ const routes = {
     film: async(req, res) => {
         let title = req.params.title;
         let titleMayus = capitalizarPrimeraLetra(title);
-
         function capitalizarPrimeraLetra(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
@@ -48,7 +47,6 @@ const routes = {
                     ".content-txt.review-card-content"
                 );
                 const dataComentSensa = [];
-
                 opinions.forEach((comentarios) => {
                     dataComentSensa.push(comentarios.innerText);
                 });
@@ -57,7 +55,7 @@ const routes = {
             return coments;
         }
         async function opinionsAfinity() {
-            const browser = await puppeteer.launch( { /* headless: false,  */ slowMo:40}  );
+            const browser = await puppeteer.launch( /*{ headless: false }*/ );
             const page = await browser.newPage();
             await page.goto(`https://www.filmaffinity.com/es/main.html`);
             await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
@@ -74,11 +72,9 @@ const routes = {
                     'div[itemprop=reviewBody]'
                 );
                 const dataComentAfinity = [];
-
                 opinionsAfinity.forEach((comentarios) => {
                     dataComentAfinity.push(comentarios.innerText);
                 });
-
                 return dataComentAfinity;
             });
             return coments;
