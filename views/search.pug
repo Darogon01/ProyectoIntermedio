@@ -11,7 +11,10 @@ main#usrMovies
       each film in filmsdata
         li(class=`idFilm_${film.imdbID}`)
           div(id=`idFilm_${film.imdbID}`).card
-            img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
+            if film.Poster == 'N/A'
+              img.poster(src='../static/img/Image-Not-Available.png', alt=`Cartel ${film.Title}`)
+            else
+              img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
             div.info
               h2 #{film.Title}
               p 
