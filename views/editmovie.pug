@@ -3,8 +3,8 @@ include ./header
 main#adminCreate 
     form(action="/editMovie", method="post")
         input(type='hidden' name='_method' value='put')
-        input(type='hidden' name='filmId' value=filmId)
         if message
+            input(type='hidden' name='filmId' value=data.filmId)
             - let placeholderT = message.errors.title ? "El título es un campo requerido" : ""
             - let valueT = data.title != '' ? data.title : ''
             - let warningT = placeholderT != "" ? "err" : ""
@@ -15,7 +15,7 @@ main#adminCreate
             else 
                 input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=data.urlImage)
             if message.errors.year
-                span.popuptext El año no puede ser menor a 1888
+                span.popuptext El año debe estar entre 1888 y #{new Date().getFullYear() + 2}
                 input#year(type="number", name="year", placeholder="Año err", value=message.errors.year.value, class="err")
             else 
                 input#year(type="number", name="year", placeholder="Año err", value=data.year)
@@ -24,6 +24,7 @@ main#adminCreate
             input#runtime(type="number", name="runtime", value=data.runtime, placeholder="Duración")
             input(type="submit", value="Editar Pelicula")
         else
+            input(type='hidden' name='filmId' value=filmId)
             input#title(type="text", name="title", value=title, placeholder="Título")
             input#urlImage(type="text", name="urlImage", value=urlImage, placeholder="URL Imagen")
             input#year(type="number", name="year", value=year, placeholder="Año")

@@ -5,6 +5,7 @@ listElements.forEach(li => {
     document.getElementById(li.className).addEventListener("click", () => {
         window.location.href = `/search/${title}`
     })
+
     document.querySelector(`.favorite.${li.className}`).addEventListener("click", () => {
         Swal.fire({
             title,
@@ -38,7 +39,8 @@ listElements.forEach(li => {
                         });
                         return response
                     }
-                    postData({ email: "juanma@mail.co", api_id_film: li.className }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+                    let idFilm = li.className.split("_")[1]
+                    postData({ email: "juanma@mail.co", api_id_film: idFilm }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
                         .then(() => { window.location.href = `/movies` })
                 })
             }
