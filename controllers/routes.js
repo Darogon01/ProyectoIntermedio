@@ -161,6 +161,24 @@ const routes = {
             };
             const filmsIds = await getFilmsIds(titulo);
             let filmsdata = await getFilms(filmsIds)
+            let regexSearch = new RegExp(titulo)
+            let filmsDB
+            try {
+                filmsDB = await Film.find({ title: { $regex: regexSearch, $options: 'i' } })
+            } catch (err) {
+                res.status(400).end()
+            }
+            filmsDB.forEach(film => {
+                filmsdata.push({
+                    imdbID: film.filmId.toString(),
+                    Poster: film.urlImage,
+                    Title: film.title,
+                    Year: film.year,
+                    Director: film.director,
+                    Genre: film.genre,
+                    Runtime: film.runtime,
+                })
+            })
             let allDataFavs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
             let idsFavs = []
             allDataFavs.forEach(film => {
