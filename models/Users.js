@@ -1,9 +1,10 @@
 const mariadb = require('mariadb');
 const pool = mariadb.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'proyect_inter',
+    host: process.env.SQL_DATABASE_URL,
+    user: process.env.SQL_DATABASE_USER,
+    password: process.env.SQL_DATABASE_PASS,
+    database: process.env.SQL_DATABASE_NAME,
+    port: process.env.SQL_DATABASE_PORT,
     connectionLimit: 5
 });
 
