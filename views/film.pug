@@ -1,4 +1,6 @@
 include ./header
+
+title Film
 main.searchTitleMain
     div.wraperserchtitle
         div 
@@ -9,16 +11,17 @@ main.searchTitleMain
             p Genero: #{data.Genre}
             p Duración: #{data.Runtime}
             p Año: #{data.Year}
-            img.favoritesearchtitle(src="../static/img/favorite.svg", alt="favorite icon")
+            button(id="btn-favorito" class=`favorite fav`)
+              img(src="../static/img/favorite.svg", alt="favorite icon")
     div.containersearchcoments
         h2 Sipnopsis
-            p #{Plot}
+            p #{data.Plot}
         h2 Opiniones
             each val in comentarios
                 p #{val}
             each val in coments 
                 p #{val}
             
-
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
 script(src='../static/js/searchTitle.js')       
     

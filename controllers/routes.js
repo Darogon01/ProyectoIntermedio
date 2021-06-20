@@ -18,6 +18,7 @@ const routes = {
     },
     film: async(req, res) => {
         let title = req.params.title;
+        
         let titleMayus = capitalizarPrimeraLetra(title);
 
         function capitalizarPrimeraLetra(str) {
@@ -26,6 +27,7 @@ const routes = {
         let data = await films.getPelicula(
             `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
+            console.log(data)    
         async function opinionsSensa() {
             const browser = await puppeteer.launch( /*{ headless: false }*/ );
             const page = await browser.newPage();
@@ -85,7 +87,7 @@ const routes = {
         }
         let reviewsSensa = await opinionsSensa();
         let reviewsAfinity = await opinionsAfinity();
-        res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
+         res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
     },
     movies: async(req, res) => {
         let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
