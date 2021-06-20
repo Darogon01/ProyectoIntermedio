@@ -361,12 +361,12 @@ nav li:hover {
     
     
 }
-@keyframes fadeOut {
+/* @keyframes fadeOut {
     100% {
         opacity: 0;
         visibility: hidden;
     }
-}
+} */
 .searchTitleMain {
     display: flex;
     flex-direction: column;
@@ -379,6 +379,12 @@ nav li:hover {
 
 .wraperserchtitle {
     display: flex;
+    background: rgba(120, 255, 244, 0.158);
+    box-shadow: 0 8px 32px 0 #2525255e;
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border-radius: 10px;
+    border: 1px solid #5c5c5c2e;
 }
 
 .containersearchfilm {
@@ -405,8 +411,16 @@ nav li:hover {
     width: 10vw;
 }
 
+
 .containersearchcoments p {
     margin-bottom: 1rem;
+    padding: 0.5rem;
+    background: #16f1df27;
+    box-shadow: 0 8px 32px 0 #2525255e;
+    backdrop-filter: blur( 2.5px );
+    -webkit-backdrop-filter: blur( 2.5px );
+    border-radius: 10px;
+    border: 1px solid #5c5c5c2e;
 }
 
 #usrMovies button.favorite {
