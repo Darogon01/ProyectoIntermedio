@@ -350,6 +350,23 @@ nav li:hover {
 
 /* ------------------- ESTILOS FILM  ------------------- */
 
+.loading{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hidden {
+    display: none;
+    
+    
+}
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
 .searchTitleMain {
     display: flex;
     flex-direction: column;

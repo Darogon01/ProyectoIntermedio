@@ -1,7 +1,7 @@
 include ./header
-
+div.hidden#charge
+  img(src="../static/img/loading.gif", alt="favorite icon")
 main#usrMovies
-
   form(action='/search' method='post')
     input(type='search' name='busqueda' placeholder='Título de película...')    
     input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 

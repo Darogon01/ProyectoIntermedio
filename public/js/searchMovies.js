@@ -75,3 +75,11 @@ listElements.forEach(li => {
         })
     })
 })
+
+
+ document.querySelector(".card").addEventListener("click", function () {
+     console.log('cklicado')
+    /* document.getElementById("usrMovies").innerHTML = ""; */
+    document.getElementById("charge").classList.remove("hidden");
+});
+
