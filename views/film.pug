@@ -14,12 +14,12 @@ main.searchTitleMain
             img.favoritesearchtitle(src="../static/img/favorite.svg", alt="favorite icon")
     div.containersearchcoments
         h2 Sipnopsis
-            p #{data.Plot}
+        p #{data.Plot}
         h2 Opiniones
-            each val in comentarios
-                p #{val}
-            each val in coments 
-                p #{val}
+        each val in comentarios
+            p #{val}
+        each val in coments 
+            p #{val}
     div.loader       
 
 script(src='../static/js/searchTitle.js')       
