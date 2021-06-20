@@ -7,15 +7,15 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   title Home
 body#home
-  form#login-form.login(action='')
+  form#login-form.login(action="/" method="post")
     header
       img(src='./static/img/clapperboard.svg' alt='clapperboard')
-    .field
+    div.field
       span.fa.fa-user
-      input#login-email(type='text' placeholder='Email')
-    .field
+      input#login-email(type='text' placeholder='Email' name="email")
+    div.field
       span.fa.fa-lock
-      input#login-password(type='password' placeholder='Password')
+      input#login-password(type='password' placeholder='Password' name="password" )
     input.submit(type='submit' value='Iniciar sesión')
     span.login-form-copy Or Login with
     .social-icons
@@ -23,7 +23,7 @@ body#home
         span.fa.fa-google
         button#googleLogin(type='button')
     span.login-form-copy
-      | Don&apos;t have an account?
+      | ¿No tienes una cuenta?
       a.login-form_sign-up(href='./signup') Sign up
 
 
