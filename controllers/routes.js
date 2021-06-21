@@ -1,4 +1,5 @@
 const films = require("../utils/film");
+const jwt = require('jsonwebtoken')
 const Film = require("../models/Films");
 const User = require("../models/Users");
 const puppeteer = require("puppeteer");
@@ -14,7 +15,8 @@ const routes = {
         res.status(200).render("signup", url);
     },
     dashboard: (req, res) => {
-        res.status(200).render("dashboard");
+        let url = { url: req.url };
+        res.status(200).render("dashboard", url);
     },
     film: async(req, res) => {
         let title = req.params.title;
@@ -99,6 +101,23 @@ const routes = {
 
     },
     movies: async(req, res) => {
+        if (req.headers.cookie) {
+            token = req.headers.cookie.slice(6)
+        }
+        let decodedToken
+        jwt.verify(token, process.env.SECRET, (err, token) => {
+            decodedToken = token
+        })
+
+        if (decodedToken.isAdmin) {
+            try {
+                const films = await Film.find()
+                return res.status(200).render('movies-admin', { films })
+            } catch (err) {
+                return res.status(400).json({ message: err.message })
+            }
+        }
+
         let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
         let arrFavoritasApi = []
         let arrFavoritasDB = []
@@ -147,8 +166,9 @@ const routes = {
         res.status(200).render('movies', { favorites })
     },
     search: async(req, res) => {
+        let url = { url: req.url };
         if (req.method == "GET") {
-            res.status(200).render("search");
+            res.status(200).render("search", url);
         } else {
             let titulo = req.body.busqueda;
             let getFilmsIds = async(title) => {
@@ -198,15 +218,7 @@ const routes = {
             filmsdata.forEach(film => {
                 idsFavs.includes(film.imdbID) ? film.favorite = "fav" : film.favorite = "noFav"
             })
-            res.status(200).render("search", { filmsdata });
-        }
-    },
-    adminMovies: async(req, res) => {
-        try {
-            const data = await Film.find()
-            res.status(200).render('movies-admin', { data })
-        } catch (err) {
-            res.status(400).json({ message: err.message })
+            res.status(200).render("search", { filmsdata, url });
         }
     },
     createMovieGet: (req, res) => {
@@ -216,7 +228,7 @@ const routes = {
         const film = new Film(req.body)
         try {
             const newFilm = await film.save()
-            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+            res.status(201).redirect(`/movies`)
         } catch (err) {
             res.status(400).render('createmovie', { message: err, data: film })
         }
@@ -237,7 +249,7 @@ const routes = {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
                     if (err) return res.status(400).render('editmovie', { message: err, data: film })
-                    return res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+                    return res.status(201).redirect(`/movies`)
                 })
         } catch (err) {
             res.status(500).json({ message: err.message })
@@ -247,7 +259,7 @@ const routes = {
         let id = req.body.id
         try {
             await Film.deleteOne({ "filmId": id })
-            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+            res.status(201).redirect(`/movies`)
         } catch (err) {
             res.status(500).json({ message: err.message })
         }
@@ -272,10 +284,13 @@ const routes = {
         let id = req.body.id
         try {
             await Film.deleteOne({ "filmId": id })
-            res.status(201).redirect(`/adminmovies`) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+            res.status(201).redirect(`/movies`)
         } catch (err) {
             res.status(500).json({ message: err.message })
         }
+    },
+    error404: (req, res) => {
+        res.status(404).render("404")
     }
 }
 

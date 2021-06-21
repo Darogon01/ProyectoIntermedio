@@ -2,6 +2,8 @@ const router = require('express').Router()
 const pages = require('../controllers/routes')
 const login = require('../controllers/login')
 const auth = require('../middleware/userAuth')
+const isAdmin = require('../middleware/isAdmin')
+const isUser = require('../middleware/isUser')
 
 router.get('/', pages.home)
 router.post('/', login.home)
@@ -9,22 +11,22 @@ router.post('/', login.home)
 router.get('/signup', pages.signup)
 router.post('/signup', login.signup)
 
-router.get('/search', pages.search)
-router.post('/search', pages.search)
+router.get('/search', auth, isUser, pages.search)
+router.post('/search', auth, isUser, pages.search)
 
-router.get('/dashboard', auth, pages.dashboard)
-router.get('/search/:title', pages.film)
-router.get('/movies', pages.movies)
-router.get('/adminMovies', pages.adminMovies) //CAMBIAR ENDPOINT CUANDO TENGAMOS ROLES DE USER Y ADMIN /movies
+router.get('/dashboard', auth, isUser, pages.dashboard)
+router.get('/search/:title', auth, isUser, pages.film)
+router.get('/movies', auth, pages.movies)
 
-router.get('/createMovie', pages.createMovieGet)
-router.post('/createMovie', pages.createMoviePost)
+router.get('/createMovie', auth, isAdmin, pages.createMovieGet)
+router.post('/createMovie', auth, isAdmin, pages.createMoviePost)
 
-router.get('/editMovie/:id', pages.editMovieGet)
-router.post('/editMovie', pages.editMoviePut) //CAMBIADO A POST PARA PODER HACER EL CONTROL DE ERRORES DEL FORMULARIO
+router.get('/editMovie/:id', auth, isAdmin, pages.editMovieGet)
+router.post('/editMovie', auth, isAdmin, pages.editMoviePut) //CAMBIADO A POST PARA PODER HACER EL CONTROL DE ERRORES DEL FORMULARIO
 
-router.delete('/removeMovie', pages.deleteMovie)
+router.delete('/removeMovie', auth, isAdmin, pages.deleteMovie)
 
-router.post('/favorite', pages.favorite)
+router.post('/favorite', auth, pages.favorite)
+router.get('*', auth, pages.error404)
 
 module.exports = router

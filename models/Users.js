@@ -17,7 +17,7 @@ const User = {
             const sql_query = 'INSERT INTO users (email,password) value (?,?)'
             res = await conn.query(sql_query, user_data)
         } catch (err) {
-            res = err.message
+            res = { error: "El usuario ya existe" }
         } finally {
             if (conn) conn.end()
         }
@@ -36,16 +36,40 @@ const User = {
             if (conn) return conn.end()
         }
     },
+    updateUserToken: async(token, email) => {
+        let conn
+        try {
+            conn = await pool.getConnection()
+            const sql_query = 'UPDATE `users` SET `token`= ? WHERE `email` = ?'
+            const res = await conn.query(sql_query, [token, email])
+            console.log(res)
+        } catch (err) {
+            throw err
+        } finally {
+            if (conn) return conn.end()
+        }
+    },
+    getUserToken: async(email) => {
+        let conn
+        try {
+            conn = await pool.getConnection()
+            const sql_query = 'SELECT `token` FROM `users` WHERE `email`= ?'
+            const res = await conn.query(sql_query, [email])
+            console.log(res)
+        } catch (err) {
+            throw err
+        } finally {
+            if (conn) return conn.end()
+        }
+    },
     getUser: async(email) => {
         let conn
         let res
-        console.log(email)
-
         try {
             conn = await pool.getConnection()
             const sql_query = 'SELECT * FROM users WHERE email = ?'
             res = await conn.query(sql_query, [email])
-                // console.log(res)
+            console.log(res)
         } catch (err) {
             res = err.message
         } finally {
@@ -87,7 +111,6 @@ const User = {
             const res = await conn.query(sql_query, [email, api_id_film])
             console.log(res)
             console.log(`Creado favorito ${api_id_film} para el usuario ${email}`)
-                // }
         } catch (err) {
             throw err
         } finally {
@@ -107,10 +130,6 @@ const User = {
             if (conn) return conn.end()
         }
     }
-
-    // User.getUser(2)
-    // User.getAllUsers()
-    // User.createUser(["juanma@mail.com", "123456", "fdg32afdsg321354g6a54dfg"])
 }
 
 module.exports = User

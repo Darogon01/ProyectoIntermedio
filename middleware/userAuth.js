@@ -1,11 +1,9 @@
 const jwt = require('jsonwebtoken')
 module.exports = (req, res, next) => {
-    const auth = req.get('authorization')
-    let token = null
-    if (auth && auth.toLowerCase().startsWith('bearer')) {
-        token = auth.split(' ')[1]
+    let token
+    if (req.headers.cookie) {
+        token = req.headers.cookie.slice(6)
     }
-    console.log(token)
     let decodedToken
     jwt.verify(token, process.env.SECRET, (err, token) => {
         if (err) {
@@ -21,6 +19,5 @@ module.exports = (req, res, next) => {
             error: 'token perdido o incorrecto'
         })
     }
-    console.log(decodedToken)
     next()
 }

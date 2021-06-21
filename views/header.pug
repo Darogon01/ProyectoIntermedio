@@ -9,19 +9,27 @@ html(lang="en")
         link(rel="stylesheet", href="../static/css/style.css")
     body 
     if url != "/" && url != "/signup"
-        header
-            nav(id='contenedor')
-                input#menu(type='checkbox')
-                label(for='menu') Menú
-                ul(class='drop')
-                    li
-                        a(href='/dashboard') Panel de control
-                    li
-                        a(href='/search') Buscador de películas
-                    li
-                        a(href='/movies') Mis películas
-                    li
-                        a(href='#') Salir
-                            
-            
-        
+        if favorites || url == "/dashboard" || data || url == "/search" || filmsdata
+            header
+                nav(id='contenedor')
+                    input#menu(type='checkbox')
+                    label(for='menu') Menú
+                    ul(class='drop')
+                        li
+                            a(href='/dashboard') Panel de control
+                        li
+                            a(href='/search') Buscador de películas
+                        li
+                            a(href='/movies') Mis películas
+                        li
+                            a(href='#') Salir
+        else
+            header
+                nav(id='contenedor')
+                    input#menu(type='checkbox')
+                    label(for='menu') Menú
+                    ul(class='drop')
+                        li
+                            a(href='/movies') Películas
+                        li
+                            a(href='#') Salir
