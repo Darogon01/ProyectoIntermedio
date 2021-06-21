@@ -7,9 +7,7 @@ module.exports = (req, res, next) => {
     let decodedToken
     jwt.verify(token, process.env.SECRET, (err, token) => {
         if (err) {
-            return res.status(401).json({
-                error: 'token incorrecto'
-            })
+            return res.status(401).render("401")
         } else {
             decodedToken = token
         }

@@ -19,8 +19,14 @@ const routes = {
         res.status(200).render("dashboard", url);
     },
     film: async(req, res) => {
+        if (req.headers.cookie) {
+            token = req.headers.cookie.slice(6)
+        }
+        let decodedToken
+        jwt.verify(token, process.env.SECRET, (err, token) => {
+            decodedToken = token
+        })
         let title = req.params.title;
-
         let titleMayus = capitalizarPrimeraLetra(title);
 
         function capitalizarPrimeraLetra(str) {
@@ -88,17 +94,13 @@ const routes = {
         }
         // let reviewsSensa = await opinionsSensa();
         // let reviewsAfinity = await opinionsAfinity();
-
-        let allDataFavs = await User.getUserFavorites("juanma@mail.co")
+        let allDataFavs = await User.getUserFavorites(decodedToken.email)
         let idsFavs = []
         allDataFavs.forEach(film => {
             idsFavs.push(film.api_id_film)
         })
-
         idsFavs.includes(data.imdbID) ? data.favorite = "fav" : data.favorite = "noFav"
         res.status(200).render("film", { data, /*comentarios: reviewsSensa, coments: reviewsAfinity */ });
-
-
     },
     movies: async(req, res) => {
         if (req.headers.cookie) {
@@ -108,7 +110,6 @@ const routes = {
         jwt.verify(token, process.env.SECRET, (err, token) => {
             decodedToken = token
         })
-
         if (decodedToken.isAdmin) {
             try {
                 const films = await Film.find()
@@ -117,8 +118,7 @@ const routes = {
                 return res.status(400).json({ message: err.message })
             }
         }
-
-        let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+        let favs = await User.getUserFavorites(decodedToken.email)
         let arrFavoritasApi = []
         let arrFavoritasDB = []
         let getFilmsApi
@@ -166,6 +166,13 @@ const routes = {
         res.status(200).render('movies', { favorites })
     },
     search: async(req, res) => {
+        if (req.headers.cookie) {
+            token = req.headers.cookie.slice(6)
+        }
+        let decodedToken
+        jwt.verify(token, process.env.SECRET, (err, token) => {
+            decodedToken = token
+        })
         let url = { url: req.url };
         if (req.method == "GET") {
             res.status(200).render("search", url);
@@ -210,7 +217,7 @@ const routes = {
                     Runtime: film.runtime,
                 })
             })
-            let allDataFavs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+            let allDataFavs = await User.getUserFavorites(decodedToken.email)
             let idsFavs = []
             allDataFavs.forEach(film => {
                 idsFavs.push(film.api_id_film)
@@ -265,7 +272,14 @@ const routes = {
         }
     },
     favorite: async(req, res) => {
-        let email = req.body.email
+        if (req.headers.cookie) {
+            token = req.headers.cookie.slice(6)
+        }
+        let decodedToken
+        jwt.verify(token, process.env.SECRET, (err, token) => {
+            decodedToken = token
+        })
+        let email = decodedToken.email
         let api_id_film = req.body.api_id_film
         try {
             let favorite = await User.searchFavorite(email, api_id_film)

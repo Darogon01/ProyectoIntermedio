@@ -34,7 +34,7 @@
                          });
                          return response
                      }
-                     postData({ email: "juanma@mail.co", api_id_film: idFilm.split("_")[1] }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+                     postData({ api_id_film: idFilm.split("_")[1] })
                          .then(() => { window.location.reload() })
                  })
              }
@@ -60,7 +60,7 @@
                  });
                  return response
              }
-             postData({ email: "juanma@mail.co", api_id_film: idFilm.split("_")[1] }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+             postData({ api_id_film: idFilm.split("_")[1] })
                  .then(() => { window.location.reload() })
          })
      })
