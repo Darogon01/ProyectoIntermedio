@@ -27,6 +27,8 @@ router.post('/editMovie', auth, isAdmin, pages.editMoviePut) //CAMBIADO A POST P
 router.delete('/removeMovie', auth, isAdmin, pages.deleteMovie)
 
 router.post('/favorite', auth, pages.favorite)
+router.post('/logout', auth, login.logout)
+
 router.get('*', auth, pages.error404)
 
 module.exports = router

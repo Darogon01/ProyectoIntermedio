@@ -1,6 +1,5 @@
 include ./header
 
-title Film
 main.searchTitleMain(id=`idFilm_${data.imdbID}`)
     div.wraperserchtitle
         div 
@@ -11,24 +10,13 @@ main.searchTitleMain(id=`idFilm_${data.imdbID}`)
             p Genero: #{data.Genre}
             p Duración: #{data.Runtime}
             p Año: #{data.Year}
-        if data.favorite == "fav"   
-            button(class=`favorite idFilm_${data.imdbID} fav`)
-                img(src="../static/img/favorite.svg", alt="favorite icon")
-        else 
-             button(class=`favorite idFilm_${data.imdbID} nofav`)
-                img(src="../static/img/nofavorite.svg", alt="favorite icon")
-
-
-           
-    //- div.containersearchcoments
-    //-     h2 Sipnopsis
-    //-         p #{data.Plot}
-    //-     h2 Opiniones
-    //-         each val in comentarios
-    //-             p #{val}
-    //-         each val in coments 
-    //-             p #{val}
+            if data.favorite == "fav"   
+                button(class=`favorite idFilm_${data.imdbID} fav`)
+                    img(src="../static/img/favorite.svg", alt="favorite icon")
+            else
+                button(class=`favorite idFilm_${data.imdbID} nofav`)
+                    img(src="../static/img/nofavorite.svg", alt="favorite icon")
             
 script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
-script(src='../static/js/searchTitle.js')       
-    
+script(src='../static/js/searchTitle.js')
+script(src='../static/js/logout.js')    

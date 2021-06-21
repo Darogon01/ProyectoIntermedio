@@ -54,6 +54,20 @@ const routes = {
             userData.push(token)
             res.status(200).redirect("/dashboard");
         }
+    },
+    logout: async(req, res) => {
+        if (req.headers.cookie) {
+            token = req.headers.cookie.slice(6)
+        }
+        let decodedToken
+        jwt.verify(token, process.env.SECRET, (err, token) => {
+            decodedToken = token
+        })
+        let email = decodedToken.email
+
+        res.clearCookie('token');
+        await User.updateUserToken("token borrado", email)
+        res.status(200).redirect("/");
     }
 }
 

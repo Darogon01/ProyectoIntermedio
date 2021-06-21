@@ -360,39 +360,39 @@ nav li:hover {
     border-radius: 5px;
 }
 
-.wraperserchtitle {
+.searchTitleMain .wraperserchtitle {
     display: flex;
 }
 
-.containersearchfilm {
+.searchTitleMain .containersearchfilm {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 0 1rem;
 }
 
-.containersearchfilm h2 {
+.searchTitleMain .containersearchfilm h2 {
     margin: 0.3rem;
 }
 
-.containersearchfilm p {
+.searchTitleMain .containersearchfilm p {
     margin: 0.3rem;
 }
 
-.postersearchtitle {
+.searchTitleMain .postersearchtitle {
     width: 40vw;
     border-radius: 5px;
 }
 
-.favoritesearchtitle {
+.searchTitleMain .favoritesearchtitle {
     width: 10vw;
 }
 
-.containersearchcoments p {
+.searchTitleMain .containersearchcoments p {
     margin-bottom: 1rem;
 }
 
-#usrMovies button.favorite {
+.searchTitleMain button.favorite {
     border: none;
     background: none;
     margin-top: auto;
@@ -402,11 +402,11 @@ nav li:hover {
     margin-top: -50px; */
 }
 
-#usrMovies button.favorite img {
+.searchTitleMain button.favorite img {
     width: 10vw;
 }
 
-#usrMovies .info {
+.searchTitleMain .info {
     margin-left: 15px;
     display: flex;
     flex-direction: column;
@@ -482,6 +482,7 @@ div#buttons {
     margin: 10px;
     text-align: center;
 }
+
 
 /*---------------------------ESTILOS SEARCH---------------------------*/
 
