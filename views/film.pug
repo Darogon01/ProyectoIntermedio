@@ -12,12 +12,12 @@ main.searchTitleMain(id=`idFilm_${data.imdbID}`)
             p Genero: #{data.Genre}
             p Duración: #{data.Runtime}
             p Año: #{data.Year}
-        if data.favorite == "fav"   
-            button(class=`favorite idFilm_${data.imdbID} fav`)
-                img(src="../static/img/favorite.svg", alt="favorite icon")
-        else 
-             button(class=`favorite idFilm_${data.imdbID} nofav`)
-                img(src="../static/img/nofavorite.svg", alt="favorite icon")       
+            if data.favorite == "fav"   
+                button(class=`favorite idFilm_${data.imdbID} fav`)
+                    img(id="heart" src="../static/img/favorite.svg", alt="favorite icon")
+            else 
+                button(class=`favorite idFilm_${data.imdbID} nofav`)
+                    img(id="heart" src="../static/img/nofavorite.svg", alt="favorite icon")       
     div.containersearchcoments
         h2 Sipnopsis
         p #{data.Plot}

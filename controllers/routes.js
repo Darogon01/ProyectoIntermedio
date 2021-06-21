@@ -18,6 +18,7 @@ const routes = {
     },
     film: async(req, res) => {
         let title = req.params.title;
+        console.log(title);
         
         let titleMayus = capitalizarPrimeraLetra(title);
         function capitalizarPrimeraLetra(str) {
@@ -38,10 +39,11 @@ const routes = {
             await page.waitForSelector("#header-search-input");
             await page.type("#header-search-input", `                       ${titleMayus}`);
             await page.waitForSelector(
-                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt='${titleMayus}']`
             );
+
             await page.click(
-                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt='${titleMayus}']`
             );
             await page.waitForSelector(".content-txt.review-card-content");
             const coments = await page.evaluate(() => {
