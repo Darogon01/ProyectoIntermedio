@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const autoIncrement = require('mongoose-auto-increment')
-let connection = mongoose.createConnection(process.env.DATABASE_URL)
+let connection = mongoose.createConnection(process.env.MONGO_DATABASE_URL)
 autoIncrement.initialize(connection)
 
 const filmSchema = new Schema({
