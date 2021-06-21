@@ -81,8 +81,8 @@ const routes = {
             });
             return coments;
         }
-        // let reviewsSensa = await opinionsSensa();
-        // let reviewsAfinity = await opinionsAfinity();
+        let reviewsSensa = await opinionsSensa();
+        let reviewsAfinity = await opinionsAfinity();
 
         let allDataFavs = await User.getUserFavorites("juanma@mail.co") 
         let idsFavs = []
@@ -92,7 +92,7 @@ const routes = {
             
             idsFavs.includes(data.imdbID) ? data.favorite = "fav" : data.favorite = "noFav"
         console.log(data)
-         res.status(200).render("film", { data, /*comentarios: reviewsSensa, coments: reviewsAfinity */});
+         res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity});
 
          
     },
