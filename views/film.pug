@@ -2,6 +2,7 @@ include ./header
 
 main.searchTitleMain(id=`idFilm_${data.imdbID}`)
     div.wraperserchtitle
+        
         div 
             img.postersearchtitle(src=data.Poster, alt="Imagen pelicula")
         div.containersearchfilm
@@ -12,10 +13,11 @@ main.searchTitleMain(id=`idFilm_${data.imdbID}`)
             p Año: #{data.Year}
             if data.favorite == "fav"   
                 button(class=`favorite idFilm_${data.imdbID} fav`)
-                    img(src="../static/img/favorite.svg", alt="favorite icon")
-            else
+                    img(id="heart" src="../static/img/favorite.svg", alt="favorite icon")
+            else 
                 button(class=`favorite idFilm_${data.imdbID} nofav`)
-                    img(src="../static/img/nofavorite.svg", alt="favorite icon")       
+                    img(id="heart" src="../static/img/nofavorite.svg", alt="favorite icon")       
+
     div.containersearchcoments
         h2 Sipnopsis
         p #{data.Plot}

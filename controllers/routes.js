@@ -27,6 +27,7 @@ const routes = {
             decodedToken = token
         })
         let title = req.params.title;
+
         let titleMayus = capitalizarPrimeraLetra(title);
 
         function capitalizarPrimeraLetra(str) {
@@ -46,10 +47,11 @@ const routes = {
             await page.waitForSelector("#header-search-input");
             await page.type("#header-search-input", `                       ${titleMayus}`);
             await page.waitForSelector(
-                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt='${titleMayus}']`
             );
+
             await page.click(
-                `#search-engine > div > div > div.autocomplete-results > div > img[alt=${titleMayus}]`
+                `#search-engine > div > div > div.autocomplete-results > div > img[alt='${titleMayus}']`
             );
             await page.waitForSelector(".content-txt.review-card-content");
             const coments = await page.evaluate(() => {
@@ -57,7 +59,6 @@ const routes = {
                     ".content-txt.review-card-content"
                 );
                 const dataComentSensa = [];
-
                 opinions.forEach((comentarios) => {
                     dataComentSensa.push(comentarios.innerText);
                 });
@@ -83,17 +84,16 @@ const routes = {
                     'div[itemprop=reviewBody]'
                 );
                 const dataComentAfinity = [];
-
                 opinionsAfinity.forEach((comentarios) => {
                     dataComentAfinity.push(comentarios.innerText);
                 });
-
                 return dataComentAfinity;
             });
             return coments;
         }
         let reviewsSensa = await opinionsSensa();
         let reviewsAfinity = await opinionsAfinity();
+
         let allDataFavs = await User.getUserFavorites(decodedToken.email)
         let idsFavs = []
         allDataFavs.forEach(film => {
@@ -101,6 +101,7 @@ const routes = {
         })
         idsFavs.includes(data.imdbID) ? data.favorite = "fav" : data.favorite = "noFav"
         res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
+
     },
     movies: async(req, res) => {
         if (req.headers.cookie) {
