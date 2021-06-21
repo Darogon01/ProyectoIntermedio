@@ -18,6 +18,7 @@ const routes = {
     },
     film: async(req, res) => {
         let title = req.params.title;
+        
         let titleMayus = capitalizarPrimeraLetra(title);
         function capitalizarPrimeraLetra(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
@@ -25,6 +26,7 @@ const routes = {
         let data = await films.getPelicula(
             `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
+            console.log(data)    
         async function opinionsSensa() {
             const browser = await puppeteer.launch( /*{ headless: false }*/ );
             const page = await browser.newPage();
@@ -79,9 +81,20 @@ const routes = {
             });
             return coments;
         }
-        let reviewsSensa = await opinionsSensa();
-        let reviewsAfinity = await opinionsAfinity();
-        res.status(200).render("film", { data, comentarios: reviewsSensa, coments: reviewsAfinity });
+        // let reviewsSensa = await opinionsSensa();
+        // let reviewsAfinity = await opinionsAfinity();
+
+        let allDataFavs = await User.getUserFavorites("juanma@mail.co") 
+        let idsFavs = []
+            allDataFavs.forEach(film => {
+                idsFavs.push(film.api_id_film)
+            })
+            
+            idsFavs.includes(data.imdbID) ? data.favorite = "fav" : data.favorite = "noFav"
+        console.log(data)
+         res.status(200).render("film", { data, /*comentarios: reviewsSensa, coments: reviewsAfinity */});
+
+         
     },
     movies: async(req, res) => {
         let favs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
@@ -157,6 +170,24 @@ const routes = {
             };
             const filmsIds = await getFilmsIds(titulo);
             let filmsdata = await getFilms(filmsIds)
+            let regexSearch = new RegExp(titulo)
+            let filmsDB
+            try {
+                filmsDB = await Film.find({ title: { $regex: regexSearch, $options: 'i' } })
+            } catch (err) {
+                res.status(400).end()
+            }
+            filmsDB.forEach(film => {
+                filmsdata.push({
+                    imdbID: film.filmId.toString(),
+                    Poster: film.urlImage,
+                    Title: film.title,
+                    Year: film.year,
+                    Director: film.director,
+                    Genre: film.genre,
+                    Runtime: film.runtime,
+                })
+            })
             let allDataFavs = await User.getUserFavorites("juanma@mail.co") //FALTA LA OBTENCION DEL EMAIL DE USUARIO
             let idsFavs = []
             allDataFavs.forEach(film => {
@@ -220,17 +251,20 @@ const routes = {
         }
     },
     favorite: async(req, res) => {
+        console.log("favorite")
         let email = req.body.email
         let api_id_film = req.body.api_id_film
         try {
             let favorite = await User.searchFavorite(email, api_id_film)
             let id_film = favorite[0] != undefined ? favorite[0].id_film : false
+            console.log("*****************")
+            console.log(id_film)
             if (id_film) {
                 await User.removeFavorite(email, api_id_film)
             } else {
                 await User.addFavorite(email, api_id_film)
             }
-            return res.status(201).redirect(`/movies`)
+            return res.status(201).end()
         } catch (err) {
             res.status(500).json({ message: err.message })
         }

@@ -530,3 +530,12 @@ div#buttons {
     margin: 10px;
     text-align: center;
 }
+
+/*---------------------------ESTILOS SEARCH---------------------------*/
+
+input {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    width: 97%;
+}
