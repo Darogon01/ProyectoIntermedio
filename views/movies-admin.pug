@@ -6,7 +6,10 @@ main#adminMovies
         each film in films
             li(class=film.filmId id=`filmID_${film.filmId}`)
                 div(id=film.filmId).card
-                    img.poster(src=film.urlImage, alt=`Cartel ${film.title}`)
+                    if film.urlImage == 'N/A' || film.urlImage == 'https://'
+                        img.poster(src='../static/img/Image-Not-Available.png', alt=`Cartel ${film.Title}`)
+                    else
+                        img.poster(src=film.urlImage, alt=`Cartel ${film.title}`)
                     div.info
                         h2 #{film.title}
                         p 
