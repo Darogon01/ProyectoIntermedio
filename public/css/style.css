@@ -334,9 +334,15 @@ nav li:hover {
     border-radius: 5px;
 }
 
-#usrMovies img.favorite {
+#usrMovies button.favorite {
     width: 15vw;
+    border: none;
+    background: none;
     margin-top: auto;
+}
+
+#usrMovies button.favorite img {
+    width: 10vw;
 }
 
 #usrMovies .info {
