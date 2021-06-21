@@ -26,7 +26,7 @@ listElements.forEach(li => {
                     return response
                 }
                 let idFilm = li.className.split("_")[1]
-                postData({ email: "juanma@mail.co", api_id_film: idFilm }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+                postData({ api_id_film: idFilm })
                     .then(() => { window.location.reload() })
             })
         })
@@ -67,7 +67,7 @@ listElements.forEach(li => {
                             return response
                         }
                         let idFilm = li.className.split("_")[1]
-                        postData({ email: "juanma@mail.co", api_id_film: idFilm }) //FALTA LA OBTENCION DEL EMAIL DE USUARIO
+                        postData({ api_id_film: idFilm })
                             .then(() => { window.location.reload() })
                     })
                 }

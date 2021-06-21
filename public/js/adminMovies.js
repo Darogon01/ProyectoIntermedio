@@ -46,7 +46,7 @@ listElements.forEach(li => {
                         return response
                     }
                     deleteMovie({ id: filmId })
-                        .then(() => { window.location.href = `/adminmovies` }) //cambiar adminmovies por movies cuando esté listo el log de usuarios
+                        .then(() => { window.location.href = `/movies` })
                 })
             }
         })

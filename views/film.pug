@@ -1,6 +1,5 @@
 include ./header
 
-title Film
 main.searchTitleMain(id=`idFilm_${data.imdbID}`)
     div.wraperserchtitle
         
@@ -18,6 +17,7 @@ main.searchTitleMain(id=`idFilm_${data.imdbID}`)
             else 
                 button(class=`favorite idFilm_${data.imdbID} nofav`)
                     img(id="heart" src="../static/img/nofavorite.svg", alt="favorite icon")       
+
     div.containersearchcoments
         h2 Sipnopsis
         p #{data.Plot}
@@ -28,5 +28,5 @@ main.searchTitleMain(id=`idFilm_${data.imdbID}`)
             p #{val}
             
 script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
-script(src='../static/js/searchTitle.js')       
-    
+script(src='../static/js/searchTitle.js')
+script(src='../static/js/logout.js')    
