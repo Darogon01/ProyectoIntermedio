@@ -269,13 +269,14 @@ nav ul {
 }
 
 nav li {
-    display: block;
+    display:inline-block;
     background: lightgrey;
-    margin-right: -21px;
+    margin-right: 10px;
     padding: 10px;
     list-style: none;
     border-bottom: 1px solid grey;
     text-align: center;
+    position: absolute;
 }
 
 
@@ -562,5 +563,17 @@ input {
     margin: auto;
     text-align: center;
     display: flex;
-    width: 97%;
+    width: 96%;
+    height: 34px;
+    border-radius: 20px;
+    margin-top: 9px;
+    background-color: whitesmoke;
+    box-sizing: border-box;
+    
+    
+}
+
+input[type="submit" i] {
+    padding-left: 32%;
+    
 }
