@@ -221,10 +221,12 @@ nav#contenedor {
     margin-top: 5px;
     position: static;
     padding: 10px;
+    
 }
 
 nav ul {
     display: none;
+   
 }
 
 nav input:checked~ul {
@@ -233,6 +235,7 @@ nav input:checked~ul {
 
 nav input {
     display: none;
+    
 }
 
 nav label {
@@ -246,6 +249,12 @@ nav label {
     font-weight: bold;
     text-align: center;
     user-select: none;
+}
+.drop{
+    position: absolute; 
+    z-index: 2;
+    width: 97%;
+    
 }
 
 
@@ -269,14 +278,16 @@ nav ul {
 }
 
 nav li {
-    display:inline-block;
+    display:block;
     background: lightgrey;
     margin-right: 10px;
     padding: 10px;
     list-style: none;
     border-bottom: 1px solid grey;
     text-align: center;
-    position: absolute;
+   
+    
+    
 }
 
 
@@ -569,6 +580,7 @@ input {
     margin-top: 9px;
     background-color: whitesmoke;
     box-sizing: border-box;
+    
     
     
 }
