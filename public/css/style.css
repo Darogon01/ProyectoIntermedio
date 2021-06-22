@@ -292,6 +292,11 @@ nav li:hover {
     color: red;
 }
 
+#home .popuptext {
+    left: 0%;
+    margin-left: 0%;
+}
+
 .popuptext {
     width: 90%;
     background-color: rgb(255, 67, 67);

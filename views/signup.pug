@@ -9,24 +9,23 @@ body#home
   form#login-form.login(action="/signup" method="post")
     header
       img(src='./static/img/clapperboard.svg' alt='clapperboard')
+    if error
+      span.popuptext #{error}
     div.field
       span.fa.fa-user
-      input#login-email(type='text' placeholder='Email' name="email")
+      if error
+        input#login-email(type='text' placeholder='Email' name="email" value=email)
+      else 
+        input#login-email(type='text' placeholder='Email' name="email")
     div.field
       span.fa.fa-lock
-      input#login-password(type='password' placeholder='Password' name="password" )
+      if error
+        input#login-password(type='password' placeholder='Password' name="password" value=password)
+      else
+        input#login-password(type='password' placeholder='Password' name="password" )
     input.submit(type='submit' value='Registrar')
     span.login-form-copy Or Register with
     .social-icons
       .social-icon.google
         span.fa.fa-google
         button#googleLogin(type='button')
-  
-
-
-//- script(src='../static/js/signUp.js')
-
-
-
-
-

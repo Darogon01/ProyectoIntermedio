@@ -9,12 +9,20 @@ body#home
   form#login-form.login(action="/" method="post")
     header
       img(src='./static/img/clapperboard.svg' alt='clapperboard')
+    if error
+      span.popuptext #{error}
     div.field
       span.fa.fa-user
-      input#login-email(type='text' placeholder='Email' name="email")
+      if error
+        input#login-email(type='text' placeholder='Email' name="email" value=email)
+      else 
+        input#login-email(type='text' placeholder='Email' name="email")
     div.field
       span.fa.fa-lock
-      input#login-password(type='password' placeholder='Password' name="password" )
+      if error
+        input#login-password(type='password' placeholder='Password' name="password" value=password)
+      else
+        input#login-password(type='password' placeholder='Password' name="password" )
     input.submit(type='submit' value='Iniciar sesión')
     span.login-form-copy Or Login with
     .social-icons
@@ -38,9 +46,3 @@ script(src='https://www.gstatic.com/firebasejs/8.6.7/firestore.js')
 script(type="module" src='../static/js/google.js')
 
 div(id='userDetails')
-
-
- 
-
-
-
