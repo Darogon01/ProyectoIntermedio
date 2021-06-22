@@ -65,3 +65,14 @@
          })
      })
  }
+
+
+
+
+
+ document.querySelector(".favorite").addEventListener("click", function () {
+     
+    /* document.getElementById("usrMovies").innerHTML = ""; */
+    document.getElementById("charge").classList.remove("hidden");
+    document.querySelector(".fillspiner").classList.remove("hidden");
+});

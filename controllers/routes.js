@@ -226,6 +226,7 @@ const routes = {
             filmsdata.forEach(film => {
                 idsFavs.includes(film.imdbID) ? film.favorite = "fav" : film.favorite = "noFav"
             })
+            
             res.status(200).render("search", { filmsdata, url });
         }
     },
