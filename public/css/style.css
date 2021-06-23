@@ -23,13 +23,7 @@ html {
     background-size: cover;
 }
 
-/* header {
-    height: 8vh;
-    display: flex;
-    justify-content: flex-end;
-    border-bottom: 1px solid black;
-    padding: 10px;
-} */
+
 
 h2 {
   font-family: "Roboto", sans-serif;
@@ -405,6 +399,7 @@ nav li:hover {
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 10;
 }
 .fillspiner {
   position: absolute;
