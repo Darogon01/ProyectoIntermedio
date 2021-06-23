@@ -226,7 +226,7 @@ const routes = {
             filmsdata.forEach(film => {
                 idsFavs.includes(film.imdbID) ? film.favorite = "fav" : film.favorite = "noFav"
             })
-            
+
             res.status(200).render("search", { filmsdata, url });
         }
     },
@@ -239,7 +239,7 @@ const routes = {
             const newFilm = await film.save()
             res.status(201).redirect(`/movies`)
         } catch (err) {
-            res.status(400).render('createmovie', { message: err, data: film })
+            res.status(400).render('createmovie', { message: err, dataErr: film })
         }
     },
     editMovieGet: async(req, res) => {
@@ -257,7 +257,7 @@ const routes = {
         try {
             await Film.findOneAndUpdate({ "filmId": id }, film, { new: true, runValidators: true },
                 (err, data) => {
-                    if (err) return res.status(400).render('editmovie', { message: err, data: film })
+                    if (err) return res.status(400).render('editmovie', { message: err, dataErr: film })
                     return res.status(201).redirect(`/movies`)
                 })
         } catch (err) {
