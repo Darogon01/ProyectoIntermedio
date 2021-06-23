@@ -1,0 +1,32 @@
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(rel="stylesheet", href="../static/css/style.css")
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+  title Home
+  link(rel='icon' href='../static/img/favicon.ico' type='image/png')
+body#home
+  form#login-form.login(action="/signup" method="post")
+    header
+      img(src='./static/img/clapperboard.svg' alt='clapperboard')
+    if error
+      span.popuptext #{error}
+    div.field
+      span.fa.fa-user
+      if error
+        input#login-email(type='text' placeholder='Email' name="email" value=email)
+      else 
+        input#login-email(type='text' placeholder='Email' name="email")
+    div.field
+      span.fa.fa-lock
+      if error
+        input#login-password(type='password' placeholder='Password' name="password" value=password)
+      else
+        input#login-password(type='password' placeholder='Password' name="password" )
+    input.submit(type='submit' value='Registrar')
+    span.login-form-copy Or Register with
+    div.social-icons
+      a.social-icon.google(href='/auth/google')
+        div#googleLogin(type='button')
+          span.fa.fa-google

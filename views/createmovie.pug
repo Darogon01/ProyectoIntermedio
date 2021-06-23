@@ -1,0 +1,30 @@
+include ./header
+
+main#adminCreate 
+    form(action="/createMovie", method="post")
+        if message
+            - let placeholderT = message.errors.title ? "El título es un campo requerido" : ""
+            - let valueT = data.title != '' ? data.title : ''
+            - let warningT = placeholderT != "" ? "err" : ""
+            input#title(type="text", name="title", placeholder=placeholderT, value=valueT, class=warningT)
+            if message.errors.urlImage
+                span.popuptext #{message.errors.urlImage.message}
+                input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=message.errors.urlImage.value, class="err")
+            else 
+                input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=data.urlImage)
+            if message.errors.year
+                span.popuptext El año no puede ser menor a 1888
+                input#year(type="number", name="year", placeholder="Año err", value=message.errors.year.value, class="err")
+            else 
+                input#year(type="number", name="year", placeholder="Año err", value=data.year)
+        else
+            input#title(type="text", name="title", placeholder="Título")
+            input#urlImage(type="text", name="urlImage", placeholder="URL Imagen")
+            input#year(type="number", name="year", placeholder="Año")
+        input#director(type="text", name="director", placeholder="Director")
+        input#genre(type="text", name="genre", placeholder="Género")
+        input#runtime(type="number", name="runtime", placeholder="Duración")
+        input(class="btn-crear" type="submit", value="Crear Pelicula")
+
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+script(src='../static/js/logout.js')

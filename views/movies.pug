@@ -1,0 +1,37 @@
+include ./header
+div.wraperloading
+  div.fillspiner.hidden
+    div.hidden#charge.loading
+      div.arc
+      div.arc
+      div.arc
+      
+main#usrMovies
+    ul
+        each film in favorites
+            li(class=`idFilm_${film.imdbID}`)
+                div(id=`idFilm_${film.imdbID}`).card
+                    if film.Poster == 'N/A' || film.Poster == 'https://'
+                        img.poster(src='../static/img/Image-Not-Available.png', alt=`Cartel ${film.Title}`)
+                    else
+                        img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
+                    div.info
+                        h2 #{film.Title}
+                        p 
+                            strong Año:
+                            |  #{film.Year}
+                        p 
+                            strong Director: 
+                            | #{film.Director}
+                        p 
+                            strong Género: 
+                            | #{film.Genre}
+                        p 
+                            strong Duración: 
+                            | #{film.Runtime}
+                button(class=`favorite idFilm_${film.imdbID}`)
+                    img(src="../static/img/favorite.svg", alt="favorite icon")
+                
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+script(src='../static/js/usrMovies.js')
+script(src='../static/js/logout.js')

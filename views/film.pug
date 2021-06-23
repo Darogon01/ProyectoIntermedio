@@ -1,0 +1,38 @@
+include ./header
+
+div.wraperloading
+  div.fillspiner.hidden
+    div.hidden#charge.loading
+      div.arc
+      div.arc
+      div.arc
+main.searchTitleMain(id=`idFilm_${data.imdbID}`)
+    div.wraperserchtitle
+        
+        div 
+            img.postersearchtitle(src=data.Poster, alt="Imagen pelicula")
+        div.containersearchfilm
+            h2 #{data.Title}
+            p Director: #{data.Director}
+            p Genero: #{data.Genre}
+            p Duración: #{data.Runtime}
+            p Año: #{data.Year}
+            if data.favorite == "fav"   
+                button(class=`favorite idFilm_${data.imdbID} fav`)
+                    img(id="heart" src="../static/img/favorite.svg", alt="favorite icon")
+            else 
+                button(class=`favorite idFilm_${data.imdbID} nofav`)
+                    img(id="heart" src="../static/img/nofavorite.svg", alt="favorite icon")       
+
+    div.containersearchcoments
+        h2 Sinopsis
+        p #{data.Plot}
+        h2 Opiniones
+        each val in comentarios
+            p #{val}
+        each val in coments 
+            p #{val}
+            
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+script(src='../static/js/searchTitle.js')
+script(src='../static/js/logout.js')    

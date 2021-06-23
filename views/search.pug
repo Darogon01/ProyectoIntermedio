@@ -1,0 +1,46 @@
+include ./header
+div.wraperloading
+  div.fillspiner.hidden
+    div.hidden#charge.loading
+      div.arc
+      div.arc
+      div.arc
+
+main#usrMovies
+  form(action='/search' method='post')
+    input(type='search' name='busqueda' placeholder='Título de película...')    
+    input(type='submit' id='btn-search' class='btn-success' value='Buscar Película') 
+
+  if filmsdata  
+    ul
+      each film in filmsdata
+        li(class=`idFilm_${film.imdbID}`)
+          div(id=`idFilm_${film.imdbID}`).card
+            if film.Poster == 'N/A' || film.Poster == 'https://'
+              img.poster(src='../static/img/Image-Not-Available.png', alt=`Cartel ${film.Title}`)
+            else
+              img.poster(src=film.Poster, alt=`Cartel ${film.Title}`)
+            div.info
+              h2 #{film.Title}
+              p 
+                strong Año:
+                |  #{film.Year}
+              p 
+                strong Director: 
+                | #{film.Director}
+              p 
+                strong Género: 
+                | #{film.Genre}
+              p 
+                strong Duración: 
+                | #{film.Runtime}
+          if film.favorite == "fav"            
+            button(class=`favorite idFilm_${film.imdbID} fav`)
+              img(src="../static/img/favorite.svg", alt="favorite icon")
+          else
+            button(class=`favorite idFilm_${film.imdbID} nofav`)
+              img(src="../static/img/nofavorite.svg", alt="favorite icon")
+
+script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')
+script(src='../static/js/searchMovies.js')              
+script(src='../static/js/logout.js')
