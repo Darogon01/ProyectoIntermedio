@@ -3,6 +3,8 @@ let listElements = document.querySelectorAll("#usrMovies li");
 listElements.forEach((li) => {
   let title = document.querySelector(`#${li.className} h2`).innerHTML;
   document.getElementById(li.className).addEventListener("click", () => {
+    document.getElementById("charge").classList.remove("hidden");
+    document.querySelector(".fillspiner").classList.remove("hidden");
     window.location.href = `/search/${title}`;
   });
   let nofavs = document.querySelectorAll(`.favorite.${li.className}.nofav`);
@@ -82,41 +84,47 @@ listElements.forEach((li) => {
   });
 });
 
-function clickCard(){
-    let card = document.querySelector(".card");
-  if (card) {
-  card.addEventListener("click", function () {
-    /* document.getElementById("usrMovies").innerHTML = ""; */
-    document.getElementById("charge").classList.remove("hidden");
-    document.querySelector(".fillspiner").classList.remove("hidden");
-  });
-}
+// function clickCard(){
+//     let card = document.querySelector(".card");
+//   if (card) {
+//   card.addEventListener("click", function () {
+//     /* document.getElementById("usrMovies").innerHTML = ""; */
+//     document.getElementById("charge").classList.remove("hidden");
+//     document.querySelector(".fillspiner").classList.remove("hidden");
+//   });
+// }
 
-}
+// }
 
 
-document
-  .querySelector("#btn-search")
-  .addEventListener("click", async function (e) {
-    e.preventDefault();
-    console.log("clickado");
-    /* document.getElementById("usrMovies").innerHTML = ""; */
-    document.getElementById("charge").classList.remove("hidden");
-    document.querySelector(".fillspiner").classList.remove("hidden");
-    let value = document.querySelector('input[name="busqueda"]').value;
+// document
+//   .querySelector("#btn-search")
+//   .addEventListener("click", async function (e) {
+//     e.preventDefault();
+//     console.log("clickado");
+//     /* document.getElementById("usrMovies").innerHTML = ""; */
+//     document.getElementById("charge").classList.remove("hidden");
+//     document.querySelector(".fillspiner").classList.remove("hidden");
+//     let value = document.querySelector('input[name="busqueda"]').value;
 
-    const data = {
-      busqueda: value,
-    };
+//     const data = {
+//       busqueda: value,
+//     };
 
-    const response = await fetch("/search", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const result = await response.text();
-    document.body.innerHTML = result;
-    clickCard()
-  });
+//     const response = await fetch("/search", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(data),
+//     });
+//     const result = await response.text();
+//     document.body.innerHTML = result;
+//     // clickCard()
+//   });
+document.getElementById("btn-search").addEventListener("click",()=>{
+  console.log("buscando")
+  document.getElementById("charge").classList.remove("hidden");
+  document.querySelector(".fillspiner").classList.remove("hidden");
+
+})
