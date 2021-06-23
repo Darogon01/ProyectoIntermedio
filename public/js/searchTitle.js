@@ -38,9 +38,13 @@ document.querySelector(".favorite").addEventListener("click", () => {
                     }
                     postData({ api_id_film: idFilm.split("_")[1] })
                         .then(() => {
+                            document.getElementById("charge").classList.remove("hidden");
+                            document.querySelector(".fillspiner").classList.remove("hidden");
                             document.getElementsByClassName('favorite')[0].classList.remove('fav');
                             document.getElementsByClassName('favorite')[0].classList.add('nofav');
                             favoriteBtn[0].innerHTML = '<img id="heart" src="../static/img/nofavorite.svg" alt="favorite icon"></img>'
+                            document.getElementById("charge").classList.add("hidden");
+                            document.querySelector(".fillspiner").classList.add("hidden");
                         })
                 })
             }
@@ -66,9 +70,13 @@ document.querySelector(".favorite").addEventListener("click", () => {
             }
             postData({ api_id_film: idFilm.split("_")[1] })
                 .then(() => {
+                    document.getElementById("charge").classList.remove("hidden");
+                    document.querySelector(".fillspiner").classList.remove("hidden");
                     document.getElementsByClassName('favorite')[0].classList.remove('nofav');
                     document.getElementsByClassName('favorite')[0].classList.add('fav');
                     favoriteBtn[0].innerHTML = '<img id="heart" src="../static/img/favorite.svg" alt="favorite icon"></img>'
+                    document.getElementById("charge").classList.add("hidden");
+                    document.querySelector(".fillspiner").classList.add("hidden");
                 })
         })
     }
