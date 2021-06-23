@@ -3,6 +3,8 @@ let listElements = document.querySelectorAll("#usrMovies li")
 listElements.forEach(li => {
     let title = document.querySelector(`#${li.className} h2`).innerHTML
     document.getElementById(li.className).addEventListener("click", () => {
+        document.getElementById("charge").classList.remove("hidden");
+        document.querySelector(".fillspiner").classList.remove("hidden");
         window.location.href = `/search/${title}`
     })
 
