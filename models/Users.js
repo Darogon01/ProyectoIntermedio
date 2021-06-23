@@ -29,7 +29,6 @@ const User = {
             conn = await pool.getConnection()
             const sql_query = 'SELECT * FROM users'
             const res = await conn.query(sql_query)
-            console.log(res)
         } catch (err) {
             throw err
         } finally {
@@ -42,7 +41,6 @@ const User = {
             conn = await pool.getConnection()
             const sql_query = 'UPDATE `users` SET `token`= ? WHERE `email` = ?'
             const res = await conn.query(sql_query, [token, email])
-            console.log(res)
         } catch (err) {
             throw err
         } finally {
@@ -55,7 +53,6 @@ const User = {
             conn = await pool.getConnection()
             const sql_query = 'SELECT `token` FROM `users` WHERE `email`= ?'
             const res = await conn.query(sql_query, [email])
-            console.log(res)
         } catch (err) {
             throw err
         } finally {
@@ -69,7 +66,6 @@ const User = {
             conn = await pool.getConnection()
             const sql_query = 'SELECT * FROM users WHERE email = ?'
             res = await conn.query(sql_query, [email])
-            console.log(res)
         } catch (err) {
             res = err.message
         } finally {
@@ -96,7 +92,6 @@ const User = {
             conn = await pool.getConnection()
             const sql_query = 'SELECT id_film FROM `favorite_films` WHERE id_user = (SELECT id_user FROM users WHERE email=?) AND api_id_film = ?'
             res = await conn.query(sql_query, [email, api_id_film])
-            console.log(res)
         } catch (err) {
             throw err
         } finally {

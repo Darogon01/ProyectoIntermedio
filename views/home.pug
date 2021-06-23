@@ -25,24 +25,10 @@ body#home
         input#login-password(type='password' placeholder='Password' name="password" )
     input.submit(type='submit' value='Iniciar sesión')
     span.login-form-copy Or Login with
-    .social-icons
-      .social-icon.google
-        span.fa.fa-google
-        button#googleLogin(type='button')
+    div.social-icons
+      a.social-icon.google(href='/auth/google')
+        div#googleLogin(type='button')
+          span.fa.fa-google
     span.login-form-copy
       | ¿No tienes una cuenta?
       a.login-form_sign-up(href='./signup') Sign up
-
-
-
-// The core Firebase JS SDK is always required and must be listed first
-script(src='https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js')
-//
-  TODO: Add SDKs for Firebase products that you want to use
-  https://firebase.google.com/docs/web/setup#available-libraries
-script(src='https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js')
-script(src='https://www.gstatic.com/firebasejs/8.6.7/firestore.js')
-
-script(type="module" src='../static/js/google.js')
-
-div(id='userDetails')

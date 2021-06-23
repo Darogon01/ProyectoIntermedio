@@ -79,6 +79,26 @@ const routes = {
             }
         }
     },
+    loginGoogle: async(req, res) => {
+        const email = req.user[0].email
+        const password = req.user[0].password
+        let userData = await User.getUser(email)
+        let user = userData[0]
+
+        const dataToken = {
+            id_user: user.id_user,
+            email: user.email,
+            isAdmin: user.isAdmin
+        }
+        const token = jwt.sign(dataToken, process.env.SECRET)
+        res.cookie('token', token, { httpOnly: true });
+        await User.updateUserToken(token, email)
+        if (user.isAdmin) {
+            res.status(200).redirect("/movies");
+        } else {
+            res.status(200).redirect("/dashboard");
+        }
+    },
     logout: async(req, res) => {
         if (req.headers.cookie) {
             token = req.headers.cookie.slice(6)

@@ -25,7 +25,7 @@ body#home
         input#login-password(type='password' placeholder='Password' name="password" )
     input.submit(type='submit' value='Registrar')
     span.login-form-copy Or Register with
-    .social-icons
-      .social-icon.google
-        span.fa.fa-google
-        button#googleLogin(type='button')
+    div.social-icons
+      a.social-icon.google(href='/auth/google')
+        div#googleLogin(type='button')
+          span.fa.fa-google

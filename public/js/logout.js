@@ -6,17 +6,19 @@ document.getElementById("logout").addEventListener("click", () => {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        confirmButtonText: 'Eliminar',
+        confirmButtonText: 'Salir',
         cancelButtonColor: '#d33',
         cancelButtonText: 'Cancelar'
     }).then((result) => {
-        let postData = async(data) => {
-            const response = await fetch('/logout', {
-                method: 'POST'
-            });
-            return response
+        if (result.value) {
+            let postData = async(data) => {
+                const response = await fetch('/logout', {
+                    method: 'POST'
+                });
+                return response
+            }
+            postData()
+                .then(() => { window.location.href = `/` })
         }
-        postData()
-            .then(() => { window.location.href = `/` })
     })
 })
