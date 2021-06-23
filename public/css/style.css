@@ -9,21 +9,22 @@
 /* para los p */
 
 html {
-    font-size: 62.5%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    /* background-image: linear-gradient(to left bottom, #ffd497, #fec495, #fac696, #f2a798, #e79b9b); */
-    /* background-image: linear-gradient(to left bottom, #794f10ec, rgba(88, 64, 10, 0.753),#9e6316b9); */
-    /* background-image: linear-gradient(40deg, #ffffb1 0, #ffeca7 25%, #f2d59d 50%, #dcbf93 75%, #c7ac8a 100%); */
-    /* background-image: radial-gradient(circle at 48.49% 49.13%, #ffd54d 0, #ffc64a 25%, #f8b647 50%, #eda744 75%, #e39942 100%); */
-    background:linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 60%);
-  
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* background-image: linear-gradient(40deg, #ffffb1 0, #ffeca7 25%, #f2d59d 50%, #dcbf93 75%, #c7ac8a 100%); */
+  /* background-image: radial-gradient(circle at 48.49% 49.13%, #ffd54d 0, #ffc64a 25%, #f8b647 50%, #eda744 75%, #e39942 100%); */
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 60%
+  );
+
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-
 
 h2 {
   font-family: "Roboto", sans-serif;
@@ -34,8 +35,12 @@ h2 {
 
 p {
   font-family: "Playfair Display", serif;
-  line-height: 1.65rem;
+
+  line-height: 3rem;
   font-size: 1.8rem;
+  text-align: justify;
+
+
 }
 
 .drop {
@@ -149,19 +154,18 @@ input:checked ~ label {
 }
 
 #home .submit {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 45px;
-    margin-bottom: 25px;
-    padding-right: 69px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
-    color: white;
-    background-color: transparent;
-    border: 1px solid whitesmoke;
-    border-radius: 125px;
-    
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 45px;
+  margin-bottom: 25px;
+  padding-right: 69px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  color: white;
+  background-color: transparent;
+  border: 1px solid whitesmoke;
+  border-radius: 125px;
 }
 
 #home .submit:hover {
@@ -186,24 +190,24 @@ input:checked ~ label {
 }
 
 #home .social-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
-    width: 50px;
-    cursor: pointer;
-    height: 50px;
-    color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  width: 50px;
+  cursor: pointer;
+  height: 50px;
+  color: #fff;
 }
-
 
 #home .google {
   background-color: #ca3224;
 }
 
-
-#home input:focus, input:hover, input:active {
-    outline: none;
+#home input:focus,
+input:hover,
+input:active {
+  outline: none;
 }
 
 #home #googleLogin {
@@ -215,16 +219,14 @@ input:checked ~ label {
 /*---------------------MENU DESPLEGABLE------------------------------*/
 
 nav#contenedor {
-    margin-top: 5px;
-    position: static;
-    padding: 10px;
-    border-bottom:1px solid black;
-    
+  margin-top: 5px;
+  position: static;
+  padding: 10px;
+  border-bottom: 1px solid black;
 }
 
 nav ul {
-    display: none;
-   
+  display: none;
 }
 
 nav input:checked ~ ul {
@@ -232,28 +234,27 @@ nav input:checked ~ ul {
 }
 
 nav input {
-    display: none;
-    
+  display: none;
 }
 
 nav label {
-    box-sizing: border-box;
-    display: inline-block;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 54px;
-    height: 30px;
-    line-height: 30px;
-    font-weight: bold;
-    text-align: center;
-    user-select: none;
-    background-color: lightgray
+  box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 60px;
+  height: 40px;
+  line-height: 37px;
+  font-weight: bold;
+  font-size: medium;
+  text-align: center;
+  user-select: none;
+  background-color: lightgray;
 }
-.drop{
-    position: absolute; 
-    z-index: 2;
-    width: 97%;
-    
+.drop {
+  position: absolute;
+  z-index: 2;
+  width: 97%;
 }
 
 /* Estilo del boton cuando se pasa el mouse por encima*/
@@ -264,8 +265,8 @@ nav label:hover {
 
 /* Estilo del boton cuando el menú está expandido*/
 
-nav input:checked~label {
-    background: rgb(241,201,127);
+nav input:checked ~ label {
+  background: lightgrey;
 }
 
 nav ul {
@@ -275,16 +276,19 @@ nav ul {
 }
 
 nav li {
-    display:block;
-    background: rgb(241, 201, 127);
-    margin-right: 10px;
-    padding: 10px;
-    list-style: none;
-    border-bottom: 1px solid darkred;
-    text-align: center;
-   
-    
-    
+  display: block;
+  background: lightgray;
+  margin-right: 10px;
+  padding: 10px;
+  list-style: none;
+  border: 2px solid rgb(99, 96, 96);
+  text-align: center;
+}
+
+
+nav li a {
+  font-size: large;
+  color: black;
 }
 
 /*Estilo cuando el mouse pasa encima de cada link del menu*/
@@ -301,8 +305,8 @@ nav li:hover {
 }
 
 #home .popuptext {
-    left: 0%;
-    margin-left: 0%;
+  left: 0%;
+  margin-left: 0%;
 }
 
 .popuptext {
@@ -353,11 +357,17 @@ nav li:hover {
 
 #usrMovies li {
   display: flex;
+
+  justify-content: space-between;
   padding: 10px;
   margin: 5px;
-  border: solid 1px black;
+  background: hsla(175, 100%, 74%, 0.2);
+  box-shadow: 0 8px 32px 0 #2525255e;
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
+  border-radius: 10px;
+  border: 1px solid #5c5c5c2e;
   border-radius: 5px;
-  justify-content: space-between;
 }
 
 #usrMovies div.card {
@@ -391,8 +401,15 @@ nav li:hover {
 
 /* ------------------- ESTILOS FILM  ------------------- */
 
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .hidden {
-    display: none;
+  display: none;
 }
 .wraperloading {
   display: flex;
@@ -618,8 +635,13 @@ div#buttons {
 
 #adminCreate form {
   display: flex;
+  align-items: center;
   flex-direction: column;
   height: calc(100vh - 75px);
+}
+.popuptext {
+  margin-left: -100%;
+
 }
 
 #adminCreate input {
@@ -631,21 +653,172 @@ div#buttons {
 /*---------------------------ESTILOS SEARCH---------------------------*/
 
 input {
-    margin: auto;
-    text-align: center;
-    display: flex;
-    width: 89%;
-    height: 38px;
-    border-radius: 20px;
-    margin-top: 9px;
-    background-color: whitesmoke;
-    box-sizing: border-box;
-    padding: 8px
-    
-    
+  margin: auto;
+  text-align: center;
+  display: flex;
+  width: 89%;
+  height: 38px;
+  border-radius: 20px;
+  margin-top: 9px;
+  background-color: whitesmoke;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
 input[type="submit" i] {
-    padding-left: 32%;
-    
+  padding-left: 32%;
+}
+
+/*---------------------------ResponsiveTablet---------------------------*/
+@media (min-width: 768px) {
+  /*--------Administrador----------*/
+  #adminCreate form {
+    align-items: center;
+  }
+  .popuptext {
+    margin-left: -100%;
+  }
+
+  #adminCreate input {
+    height: 7vh;
+    margin: 20px;
+    text-align: center;
+  }
+  nav label {
+    width: 126px;
+    height: 45px;
+    font-size: x-large;
+    line-height: 41px;
+  }
+  nav li a {
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  input.btn-crear {
+    padding: 10px;
+  }
+
+  /*-------Párrafos-------*/
+
+  h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #222222;
+  }
+
+  p {
+    font-family: "Playfair Display", serif;
+    line-height: 3rem;
+    font-size: 1.8rem;
+  }
+
+  /*------Menú principal------*/
+  
+  #home .field {
+    width: 60%;
+  }
+
+  #home .submit {
+    width: 43%;
+  }
+
+  input[type="submit" i] {
+    padding-left: 38%;
+    font-size: 1.5rem;
+  }
+  #btn-search.btn-success {
+    padding-left: 37%;
+    font-size: 1.5rem;
+  }
+
+  #home .login-form-copy {
+    font-size: 1.5rem;
+  }
+
+  /*--------Panel de Control-------*/
+
+  #dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: calc(100vh - 75px);
+    justify-content: space-evenly;
+  }
+
+  #dashboard img {
+    width: 20vw;
+  }
+}
+
+
+/*---------------------------ResponsiveTFullScreen---------------------------*/
+
+@media (min-width: 1024px) {
+  /*--------------------Responsive de p y h2-------------------------*/
+
+  h2 {
+    font-family: "Roboto", sans-serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #222222;
+  }
+
+  p {
+    font-family: "Playfair Display", serif;
+    line-height: 3rem;
+    font-size: 2.4rem;
+  }
+
+  /*-----------ADMINISTRADOR----------*/
+
+  #adminCreate input {
+    font-size: 2rem;
+  }
+
+  #adminCreate input {
+    height: 5vh;
+    margin: 25px;
+    text-align: center;
+  }
+
+  /*Página principal*/
+
+  #home .submit {
+    padding-right: 103px;
+    margin-bottom: 47px;
+  }
+
+  input[type="submit" i] {
+    padding-left: 38%;
+    font-size: 20%;
+  }
+
+  #home .login-form-copy {
+    margin-top: 6px;
+  }
+  /*-----Panel de Control-----*/
+  #dashboard img {
+    width: 36vw;
+  }
+
+  nav label {
+    width: 136px;
+    height: 52px;
+    font-size: x-large;
+    line-height: 42px;
+  }
+
+  input {
+    height: 56px;
+  }
+
+  #btn-search.btn-success {
+    padding-left: 18%;
+    font-size: 2rem;
+    width: 50%;
+  }
+
+
 }
