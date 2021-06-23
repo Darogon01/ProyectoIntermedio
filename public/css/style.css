@@ -654,13 +654,6 @@ div#buttons {
 /*---------------------------ESTILOS SEARCH---------------------------*/
 
 input {
-<<<<<<< HEAD
-  margin: auto;
-  text-align: center;
-  display: flex;
-  width: 97%;
-}
-=======
     margin: auto;
     text-align: center;
     display: flex;
@@ -679,4 +672,3 @@ input[type="submit" i] {
     padding-left: 32%;
     
 }
->>>>>>> Develop
