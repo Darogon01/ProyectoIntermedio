@@ -43,7 +43,11 @@ listElements.forEach(li => {
                     }
                     let idFilm = li.className.split("_")[1]
                     postData({ api_id_film: idFilm })
-                        .then(() => { window.location.href = `/movies` })
+                        .then(() => {
+                            document.getElementById("charge").classList.remove("hidden");
+                            document.querySelector(".fillspiner").classList.remove("hidden");
+                            window.location.href = `/movies`
+                        })
                 })
             }
         })
