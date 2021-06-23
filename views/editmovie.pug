@@ -4,24 +4,24 @@ main#adminCreate
     form(action="/editMovie", method="post")
         input(type='hidden' name='_method' value='put')
         if message
-            input(type='hidden' name='filmId' value=data.filmId)
+            input(type='hidden' name='filmId' value=dataErr.filmId)
             - let placeholderT = message.errors.title ? "El título es un campo requerido" : ""
-            - let valueT = data.title != '' ? data.title : ''
+            - let valueT = dataErr.title != '' ? dataErr.title : ''
             - let warningT = placeholderT != "" ? "err" : ""
             input#title(type="text", name="title", placeholder=placeholderT, value=valueT, class=warningT)
             if message.errors.urlImage
                 span.popuptext #{message.errors.urlImage.message}
                 input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=message.errors.urlImage.value, class="err")
             else 
-                input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=data.urlImage)
+                input#urlImage(type="text", name="urlImage", placeholder="URL Imagen err", value=dataErr.urlImage)
             if message.errors.year
                 span.popuptext El año debe estar entre 1888 y #{new Date().getFullYear() + 2}
                 input#year(type="number", name="year", placeholder="Año err", value=message.errors.year.value, class="err")
             else 
-                input#year(type="number", name="year", placeholder="Año err", value=data.year)
-            input#director(type="text", name="director", value=data.director, placeholder="Director")
-            input#genre(type="text", name="genre", value=data.genre, placeholder="Género")
-            input#runtime(type="number", name="runtime", value=data.runtime, placeholder="Duración")
+                input#year(type="number", name="year", placeholder="Año err", value=dataErr.year)
+            input#director(type="text", name="director", value=dataErr.director, placeholder="Director")
+            input#genre(type="text", name="genre", value=dataErr.genre, placeholder="Género")
+            input#runtime(type="number", name="runtime", value=dataErr.runtime, placeholder="Duración")
             input(type="submit", value="Editar Pelicula")
         else
             input(type='hidden' name='filmId' value=filmId)

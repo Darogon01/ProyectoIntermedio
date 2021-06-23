@@ -149,7 +149,7 @@ nav ul.drop li {
 #home .field input {
     width: 100%;
     height: 45px;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     padding: 5px;
     color: whitesmoke;
     background-color: transparent;
@@ -177,7 +177,7 @@ nav ul.drop li {
     height: 45px;
     margin-bottom: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: white;
     background-color: transparent;
     border: 1px solid whitesmoke;
@@ -190,7 +190,8 @@ nav ul.drop li {
 }
 
 #home .login-form-copy {
-    margin-bottom: 15px;
+    margin: 15px 0;
+    font-size: 1.2rem;
 }
 
 #home .login-form_sign-up {
@@ -202,7 +203,6 @@ nav ul.drop li {
     display: flex;
     width: 100%;
     justify-content: center;
-    padding-bottom: 5px;
 }
 
 #home .social-icon {
@@ -636,6 +636,7 @@ img {
 
 #adminMovies img.poster {
     width: 30vw;
+    height: fit-content;
     border-radius: 5px;
 }
 
