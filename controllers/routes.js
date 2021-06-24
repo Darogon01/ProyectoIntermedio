@@ -37,7 +37,7 @@ const routes = {
             `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
         async function opinionsSensa() {
-            const browser = await puppeteer.launch( /*{ headless: false }*/ {
+            const browser = await puppeteer.launch({
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
@@ -72,7 +72,7 @@ const routes = {
             return coments;
         }
         async function opinionsAfinity() {
-            const browser = await puppeteer.launch( /*{ headless: false }*/ {
+            const browser = await puppeteer.launch({
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
