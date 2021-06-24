@@ -37,7 +37,12 @@ const routes = {
             `http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`
         );
         async function opinionsSensa() {
-            const browser = await puppeteer.launch( /*{ headless: false }*/ );
+            const browser = await puppeteer.launch( /*{ headless: false }*/ {
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                ],
+            });
             const page = await browser.newPage();
             await page.goto(`https://www.sensacine.com`);
             await page.waitForSelector("#didomi-notice-agree-button");
@@ -67,7 +72,12 @@ const routes = {
             return coments;
         }
         async function opinionsAfinity() {
-            const browser = await puppeteer.launch( /*{ headless: false }*/ );
+            const browser = await puppeteer.launch( /*{ headless: false }*/ {
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                ],
+            });
             const page = await browser.newPage();
             await page.goto(`https://www.filmaffinity.com/es/main.html`);
             await page.waitForSelector("#qc-cmp2-ui > div.qc-cmp2-footer.qc-cmp2-footer-overlay.qc-cmp2-footer-scrolled > div > button.css-47sehv");
