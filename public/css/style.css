@@ -154,6 +154,7 @@ nav ul.drop li {
     color: whitesmoke;
     background-color: transparent;
     border: none;
+    border-radius: 0 20px 20px 0;
 }
 
 #home .forgot-password {
